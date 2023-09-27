@@ -1,0 +1,5 @@
+<div>
+  <span [class.tachado]="todo.completed">{{todo.tarea}}</span>
+  <button (click)="done.emit(todo.id)">Done</button>
+  <button (click)="delete.emit(todo.id)">Delete</button>
+</div>

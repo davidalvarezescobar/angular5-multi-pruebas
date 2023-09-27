@@ -1,0 +1,10 @@
+<p>
+  Usamos ng-container + templates, en lugar de content proyection:
+</p>
+
+<ul *ngFor="let datarow of dataList">
+  <ng-container
+    [ngTemplateOutlet]="rowRef"
+    [ngTemplateOutletContext]="{templateData: datarow}">
+  </ng-container>
+</ul>

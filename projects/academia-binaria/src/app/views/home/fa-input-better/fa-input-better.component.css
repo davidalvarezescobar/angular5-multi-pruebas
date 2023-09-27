@@ -1,0 +1,14 @@
+:host{
+    display: inline-block;
+    border: 1px solid red;
+    margin: 4px;
+}
+
+:host ::ng-deep input{
+    border: none;
+    outline: none;
+}
+
+:host(.outline){
+    border: 1px solid blue;
+}

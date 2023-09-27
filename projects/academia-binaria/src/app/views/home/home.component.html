@@ -1,0 +1,31 @@
+<p>
+  home works! 
+  <a routerLink="/profile">Go profile</a>
+  <a routerLink="/operations">Go operations</a>
+</p>
+
+<p> Componente fa-input
+  <fa-input *ngFor="let prop of inputProps"
+    [placeHolder]="prop.pHolder"
+    [icon]="prop.icon"
+    (value)="value=$event">
+  </fa-input>
+</p>
+<button (click)="add()">ADD</button>
+<div>Value obtenido: {{value}}</div>
+
+<p> Componente fa-input mejorado con content projection
+  <fa-input-better icon="envelope">
+    <input type="email" placeholder="email" inputHandler>
+  </fa-input-better>
+</p>
+
+<p>Prueba de combo:</p>
+<!-- Binds the 'change event' to the number 0, it´s the shortest template statement possible. 
+     While the statement does nothing useful, it satisfies Angular's requirement so that Angular will update the screen: -->
+<select #combo (change)="0">
+  <option value="" disabled selected hidden>Choose...</option>
+  <option *ngFor="let prop of inputProps" [value]="prop.pHolder">{{prop.icon}}</option>
+</select>
+<div>Value obtenido: {{combo.value}}</div>
+<div>Text obtenido: {{combo.options[combo.selectedIndex].text}}</div>

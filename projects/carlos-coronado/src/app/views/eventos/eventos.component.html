@@ -1,0 +1,54 @@
+<div>
+    <h1 tooltip="Prueba para ver que funciona la directiva 'tooltip'">Listado de eventos</h1>
+</div>
+
+<div class="buscador">
+  <span>Buscar evento: </span>
+  <app-buscador (searchData)="searchData($event)"></app-buscador>
+  <a routerLink="/alta-eventos"><button>Alta evento</button></a>
+</div>
+
+<ul *ngIf="(eventos$ | async) as eventos" scrollable>
+  <li>
+    <p>DESCRIPCIÓN MOTOR <i class="fa fa-sort" 
+      [ngClass]="{
+        'fa-sort-asc':(columna==='motorDescription' && ordenAsc),
+        'fa-sort-desc':(columna==='motorDescription' && !ordenAsc)
+      }" 
+      (click)="sort('motorDescription')"></i>
+    </p>
+    <p>COD. EVENTO <i class="fa fa-sort"
+      [ngClass]="{
+        'fa-sort-asc':(columna==='planCode' && ordenAsc),
+        'fa-sort-desc':(columna==='planCode' && !ordenAsc)
+      }" 
+      (click)="sort('planCode')"></i>
+    </p>
+    <p>DESCRIPCIÓN EVENTO <i class="fa fa-sort"
+      [ngClass]="{
+        'fa-sort-asc':(columna==='eventDescription' && ordenAsc),
+        'fa-sort-desc':(columna==='eventDescription' && !ordenAsc)
+      }" 
+      (click)="sort('eventDescription')"></i>
+    </p>
+    <p>PLAN ASOCIADO <i class="fa fa-sort"
+      [ngClass]="{
+        'fa-sort-asc':(columna==='planDescription' && ordenAsc),
+        'fa-sort-desc':(columna==='planDescription' && !ordenAsc)
+      }" 
+      (click)="sort('planDescription')"></i>
+    </p>
+    <p>ACCIONES</p>
+  </li>
+  <li *ngFor="let evento of eventos | orderBy: {property: columna, direction: ordenAsc}; trackBy:trackByFn">
+    <p>{{evento.motorDescription}}</p>
+    <p>{{evento.planCode}}</p>
+    <p>{{evento.eventDescription}}</p>
+    <p>{{evento.planDescription}}</p>
+    <p>
+      <span><i class="fa fa-edit" tooltip="editar"></i></span>
+      <span><i class="fa fa-eye" tooltip="detalle"></i></span>
+      <span><i class="fa fa-clone" tooltip="duplicar"></i></span>
+    </p>
+  </li>
+</ul>

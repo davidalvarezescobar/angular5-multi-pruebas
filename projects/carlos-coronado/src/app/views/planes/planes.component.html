@@ -1,0 +1,13 @@
+<h1>Listado de planes</h1>
+<ul *ngIf="(planes$ | async) as planes">
+  <li>
+    <p>CÓD. DEL PLAN</p>
+    <p>DESCRIPCIÓN DEL PLAN</p>
+    <p>ACCIONES</p>
+  </li>
+  <li *ngFor="let plan of planes">
+    <p>{{plan.planCode}}</p>
+    <p>{{plan.planDescription}}</p>
+    <p>---</p>
+  </li>
+</ul>

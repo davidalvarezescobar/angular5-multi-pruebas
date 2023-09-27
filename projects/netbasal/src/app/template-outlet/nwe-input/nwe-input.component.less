@@ -1,0 +1,66 @@
+:host {
+  display: inline-block;
+  margin: 6px 0;
+
+  ::ng-deep {
+    .floating-label {
+      position: relative;
+    }
+
+    .floating-label input {
+      padding: 13px 50px 10px 12px;
+      border: solid 1px #deedf2;
+      border-bottom-color: #9bc3d3;
+      background-color: #ffffff;
+      font-size: 17px;
+      box-sizing: border-box;
+      height: 48px;
+      width: 100%;
+      /* posteriores cambios que afecten al input, se aplicarán con el siguiente transition: */
+      transition: all 0.2s linear;
+    }
+
+    .floating-label label {
+      position: absolute;
+      top: calc(30%);
+      left: 10px;
+      opacity: 0;
+      font-family: Arial;
+      color: #727272;
+      font-size: 17px;
+      line-height: 1.33;
+      /* posteriores cambios que afecten a la label, se aplicarán con el siguiente transition: */
+      transition: all 0.3s ease;
+    }
+
+    .floating-label i {
+      position: absolute;
+      right: 1px;
+      top: 10px;
+      border-left: 1px solid #cedee7;
+      padding: 7px 10px;
+      color: #727272;
+    }
+
+    .floating-label input:focus {
+      outline: 0;
+    }
+
+    /* cambios sobre el input, cuando no se muestre el placeholder */
+    .floating-label input:not(:placeholder-shown) {
+      font-size: 16px;
+      color: #444444;
+      line-height: 1.5;
+      padding-top: 18px;
+      padding-bottom: 4px;
+      padding-left: 12px;
+    }
+
+    /* cambios sobre la label, cuando no se muestre el placeholder */
+    .floating-label input:not(:placeholder-shown) + label {
+      transform: translateY(-8px);
+      font-size: 12px;
+      opacity: 1;
+    }
+  }
+}

@@ -1,0 +1,22 @@
+<table *ngIf="numberOfOperations > 0; else emptyList">
+  <thead>
+    <th>Description</th>
+    <th>Kind</th>
+    <th>Amount</th>
+    <th>Delete</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let operation of operations">
+      <td><a routerLink="/item/{{operation._id}}">{{operation._id}}</a></td>
+      <td>{{operation.description}}</td>
+      <td>{{operation.kind}}</td>
+      <td>{{operation.amount}}</td>
+      <td>
+        <button (click)="deleteOperation(operation)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<ng-template #emptyList>
+  <h3>No data</h3>
+</ng-template>

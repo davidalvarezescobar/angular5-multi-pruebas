@@ -1,0 +1,15 @@
+<ng-container *ngIf="(users$ | async) as users; else loading">
+    <app-user-list [users]="users"
+        (updateUser)="onUpdateUser($event)"
+        (addUser)="modal.showModal()"
+        (aproveAll)="onAproveAll()">
+    </app-user-list>
+
+    <app-modal #modal>
+        <app-add-user (aceptar)="onAddUser($event); modal.hideModal()"></app-add-user>
+    </app-modal>
+</ng-container>
+
+<ng-template #loading>
+    <div style="width:100px;margin:0 auto"><b>LOADING . . .</b></div>
+</ng-template>

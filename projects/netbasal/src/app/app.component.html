@@ -1,0 +1,49 @@
+<section>
+    <!-- https://netbasal.com/the-power-of-selectors-in-angular-cd6947ce3bfd -->
+    <p></p>
+    <app-custom-checkbox-component [control]="customCheck"></app-custom-checkbox-component>
+    <hr>
+</section>
+
+<section>
+    <!-- https://netbasal.com/angular-custom-form-controls-made-easy-4f963341c8e2 -->
+    <p></p>
+    <app-textarea-expanded [formControl]="textoEditable"></app-textarea-expanded>
+    <button (click)="textoEditable.disable()">Disable</button>
+    <button (click)="textoEditable.enable()">Enable</button>
+    {{textoEditable.value}}
+    <hr>
+</section>
+
+<section>
+    <!-- https://netbasal.com/create-advanced-components-in-angular-e0655df5dde6 -->
+    <p></p>
+    <span tooltip="texto con tooltip" style="border: 1px solid aliceblue">Texto con tooltip</span>
+    <abbr title="Texto con tooltip nativo"><span>Texto con tooltip nativo</span></abbr>
+    <hr>
+</section>
+
+<section>
+    <!-- https://netbasal.com/manage-your-filters-like-a-pro-in-angular-with-combinelatest-e7b0204be2df -->
+    <manage-your-filters-like-a-pro></manage-your-filters-like-a-pro>
+    <hr>
+</section>
+
+<section>
+    <!-- https://netbasal.com/create-powerful-action-menu-with-angular-and-popper-eb047f789f2c -->
+    <p></p>
+    <app-select [options]="options" [selectedOption]="selected"></app-select>
+    <p>este texto quedaré oculto al abrir el options</p>
+    <hr>
+</section>
+
+<section>
+    <!-- https://netbasal.com/how-to-implement-file-uploading-in-angular-reactive-forms-89a3fffa1a03 -->
+    <app-file-uploading></app-file-uploading>
+    <hr>
+</section>
+
+<section>
+    <!-- uso de ngTemplateOutlet -->
+    <app-template-outlet></app-template-outlet>
+</section>

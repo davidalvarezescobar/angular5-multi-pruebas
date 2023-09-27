@@ -1,0 +1,36 @@
+{
+"resourceType" : [
+    {
+      "id": "all",
+      "title": "All",
+      "active": true
+    },
+    {
+      "id": "article",
+      "title": "Article"
+    },
+    {
+      "id": "video",
+      "title": "Video"
+    },
+    {
+      "id": "course",
+      "title": "Course"
+    }
+  ],
+"levels" : [
+    {
+      "id": "beginner",
+      "title": "Beginner",
+      "active": true
+    },
+    {
+      "id": "intermediate",
+      "title": "Intermediate"
+    },
+    {
+      "id": "advanced",
+      "title": "Advanced"
+    }
+  ]
+}

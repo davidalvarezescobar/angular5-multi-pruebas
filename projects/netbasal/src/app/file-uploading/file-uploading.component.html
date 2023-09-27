@@ -1,0 +1,9 @@
+<form [formGroup]="signup" (submit)="submit()">
+  <div>
+    <label for="email">Email addres</label>
+    <input type="email" formControlName="email" id="email">
+  </div>
+  <app-file-upload formControlName="image"></app-file-upload>
+
+  <button type="submit">Submit</button>
+</form>

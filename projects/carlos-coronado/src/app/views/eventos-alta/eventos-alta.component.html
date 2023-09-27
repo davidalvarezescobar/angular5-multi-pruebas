@@ -1,0 +1,8 @@
+<div>
+    <h1>Nuevo evento</h1>
+    <span (click)="location.back()"><i class="fa fa-hand-o-left"></i>Volver</span>
+</div>
+<form [formGroup]="form" (ngSubmit)="onSubmit()" submitEmitter novalidate>
+    <app-datos-generales [parent]="form"></app-datos-generales>
+    <button type="submit">Guardar</button>
+</form>

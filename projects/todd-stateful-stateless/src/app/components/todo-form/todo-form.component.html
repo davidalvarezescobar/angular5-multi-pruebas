@@ -1,0 +1,19 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <label>To do:</label>
+  <input type="text" formControlName="tarea">
+  <small *ngIf="form.get('tarea').hasError('required') && form['submitted']">
+    Campo obligatorio
+  </small>
+  <p>
+    <button type="submit">Add tarea</button>
+  </p>
+</form>
+
+
+<!-- Sin FormGroup sería así: -->
+<!-- 
+<form (ngSubmit)="submit()">
+<input type="text" [value]="tarea" (change)="tarea=$event.target.value" placeholder="Introduce Todo">
+<button type="submit">Add tarea</button>
+</form>
+-->

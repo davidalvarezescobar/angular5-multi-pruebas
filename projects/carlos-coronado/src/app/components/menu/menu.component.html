@@ -1,0 +1,16 @@
+<nav class="menu">
+  <a *ngFor="let menu of menus"
+    [ngClass]="{
+      active: menu===menuSelected,
+      hover: menu===menuHover
+    }"
+    (mouseenter)="displaySubMenu = true; menuHover = menu">{{menu.label}}
+  </a>
+</nav>
+
+<nav class="submenu" *ngIf="displaySubMenu">
+  <a *ngFor="let submenu of menuHover['submenu']"
+    [class.active]="submenu===submenuSelected"
+    (click)="navigate(submenu.link)">{{submenu.label}}
+  </a>
+</nav>

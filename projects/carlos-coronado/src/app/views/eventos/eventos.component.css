@@ -1,0 +1,47 @@
+:host {
+    display: block;
+}
+div {
+    display: flex;
+}
+div.buscador {
+    justify-content: flex-end;
+    align-items: center;
+}
+app-buscador {
+    display: inline-block;
+    margin-right: 40px;
+    margin-left: 10px;
+}
+ul {
+    padding-left: 0;
+    height: 600px;
+    overflow: auto;
+}
+li {
+    list-style-type: none;
+    display: flex;
+    
+}
+li:nth-child(odd) {
+    background-color: #F7F7F7;
+}
+li:first-child {
+    background-color: #67686E;
+    color: white;
+}
+p {
+    width: 22%;
+}
+p:last-child {
+    width: 12%;
+}
+i {
+    cursor: pointer;
+}
+p > span {
+    margin: 0 4px;
+}
+button {
+    margin-right: 1px;
+}

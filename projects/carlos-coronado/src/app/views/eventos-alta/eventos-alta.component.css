@@ -1,0 +1,10 @@
+div {
+    display: flex;
+    justify-content: space-between;
+}
+span {
+    cursor: pointer;
+}
+i {
+    margin: 0 6px;
+}

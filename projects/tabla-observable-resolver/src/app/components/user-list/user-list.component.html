@@ -1,0 +1,37 @@
+<table class="ui compact celled definition table">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Name</th>
+      <th>Registration Date</th>
+      <th>E-mail address</th>
+      <th>Premium Plan</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users">
+      <td class="collapsing">
+        <div class="ui fitted slider checkbox">
+          <input type="checkbox" [checked]="user.isPremium" (change)="onUpdateUser.emit(user)"> <label></label>
+        </div>
+      </td>
+      <td>{{user.name}}</td>
+      <td>{{user.registration}}</td>
+      <td>{{user.email}}</td>
+      <td>{{user.isPremium}}</td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <th></th>
+      <th colspan="4">
+        <span class="ui small button" (click)="onAddUser.emit()">
+          <i class="user icon" ></i> Add User
+        </span>
+        <span class="ui small button" (click)="onAproveAll.emit()">
+          Approve All
+        </span>
+      </th>
+    </tr>
+  </tfoot>
+</table>

@@ -1,0 +1,5 @@
+<h2>Inventario:</h2>
+<div *ngFor="let pizza of pizzas">
+  <h4>{{pizza.name}}</h4>
+  <span>{{pizza.toppings | join}}</span>
+</div>

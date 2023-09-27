@@ -1,0 +1,25 @@
+:host {
+    display: inline-block;
+    margin-bottom: 10px;
+}
+nav {
+    margin-bottom: 15px;
+}
+nav.menu {
+    position: relative;
+}
+nav.submenu {
+    position: absolute;
+}
+a {
+    cursor: pointer;
+    margin-right: 15px;
+    text-decoration: none;
+}
+a:hover,
+.hover {
+    background-color: azure;
+}
+.active {
+    border-bottom: 1px solid red;
+}

@@ -1,0 +1,43 @@
+:host {
+  display: block;
+  height: 350px;
+  background-image: url(../../../assets/tesla.jpg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  .tesla-wheels {
+    height: 247px;
+    width: 555px;
+    position: relative;
+    margin: 0 auto;
+  }
+  .tesla-wheel {
+    height: 80px;
+    width: 80px;
+    bottom: 0;
+    position: absolute;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    background-size: cover;
+    &--front {
+      left: 52px;
+    }
+    &--rear {
+      right: 70px;
+    }
+    &--19 {
+      background-image: url(../../../assets/wheel-19.png);
+      animation: infinite-spinning 250ms steps(12) infinite;
+    }
+  }
+}
+
+@keyframes infinite-spinning {
+    from {
+        transform: rotate(360deg);
+    }
+    to {
+        transform: rotate(0deg);
+    }
+}

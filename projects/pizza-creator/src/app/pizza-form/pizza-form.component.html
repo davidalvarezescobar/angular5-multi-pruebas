@@ -1,0 +1,22 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <app-toppings-selector 
+    [parent]="form"
+    [toppings]="toppings"
+    [selected]="selectedToppings.value"
+    (select)="onSelectTopping($event)">
+  </app-toppings-selector>
+
+  <app-pizza-name
+    [parent]="form">
+  </app-pizza-name>
+
+  <app-toppings-selected
+    [parent]="form"
+    [selected]="selectedToppings.value"
+    (remove)="removeTopping($event)">
+  </app-toppings-selected>
+
+  <app-pizza-button
+    [parent]="form">
+  </app-pizza-button>
+</form>

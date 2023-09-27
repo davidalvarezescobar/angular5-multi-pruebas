@@ -1,0 +1,31 @@
+<app-list [dataList]="arr" *ngIf="btn['status']">
+  <ng-template #rows let-movimiento="templateData">
+    <app-row [rowData]="movimiento" (select)="onSelect($event)"></app-row>
+  </ng-template>
+</app-list>
+<button #btn (click)="btn['status'] = !btn['status']">hide/show</button>
+
+<p>-----------------------------------------------------------------------</p>
+
+<form [formGroup]="form">
+  <div>
+    <input type="text" placeholder="Introduce texto" formControlName="input1">
+  </div>
+
+  <nwe-input img="search">
+    <input type="text" placeholder="Introduce texto" formControlName="input2">
+  </nwe-input>
+</form>
+
+<p>-----------------------------------------------------------------------</p>
+
+<select [formControl]="selectedUserId">
+  <option value="" hidden>Select a User</option>
+  <option *ngFor="let user of users" [value]="user.id">{{ user.name }}</option>
+</select>
+<select [formControl]="blackListedUsers" multiple>
+  <option *ngFor="let user of users" [value]="user.id">{{ user.name }}</option>
+</select>
+Allow black listed users
+<input type="checkbox" [formControl]="allowBlackListedUsers" />
+<button [disabled]="isDisabled$ | async">Submit</button>

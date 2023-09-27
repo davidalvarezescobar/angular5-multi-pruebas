@@ -1,0 +1,23 @@
+<h2>{{title | uppercase}}</h2>
+<form>
+  <label for="description">Description</label>
+  <input type="text" #inputDescription 
+    [value]="operation.description" (input)="operation.description=inputDescription.value">
+
+  <label for="amount">Amount</label>
+  <input type="text" #inputAmount formatearImporte
+    [value]="operation.amount" (blur)="operation.amount=inputAmount.value">
+
+  <label for="kind">Kind of operation</label>
+  <select name="kind" #selectKind (change)="operation.kind=selectKind.value">
+    <option value="">Please select a kind</option>
+    <option *ngFor="let kind of kindsOfOperations" [value]="kind">{{kind}}</option>
+  </select>
+  <button type="button" (click)="saveOperation()">Save</button>
+</form>
+
+<blockquote>
+  <em>Number of operations: {{numberOfOperations}}</em>
+  <br>
+  <em>Current: {{operation | json}}</em>
+</blockquote>

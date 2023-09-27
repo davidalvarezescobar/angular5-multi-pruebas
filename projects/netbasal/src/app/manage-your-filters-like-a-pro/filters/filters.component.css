@@ -1,0 +1,11 @@
+.active {
+    background-color: brown;
+}
+
+li {
+    cursor: pointer;
+}
+
+:host {
+    display: inline-block;
+}

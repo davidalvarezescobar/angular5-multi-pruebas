@@ -1,0 +1,88 @@
+<nav>
+  <button class="dropdown-toggle" [class.dropdown-toggle-on]="toggle" (click)="toggle = !toggle"></button>
+  Datos Generales
+</nav>
+
+<ng-container *ngIf="datosCombos$ | async as datosCombos">
+  <div class="container" *ngIf="toggle" [formGroup]="parent">
+    <div class="col-25">
+      <p [tooltip]="'Descripción Motor'">Descripción Motor</p>
+      <select name="motor" formControlName="motor" handleErrors>
+     <!-- [value]="..." only supports string values
+          [ngValue]="..." supports any type  -->
+        <option 
+          *ngFor="let motor of datosCombos['MO'] | orderBy: {property: 'dataDescription', direction: true}"
+          [ngValue]="motor">
+          {{motor.dataDescription}}
+        </option>
+      </select>
+    </div>
+    <div class="col-25">
+      <p [tooltip]="'Código evento'">Cód. Evento</p>
+      <input type="text" formControlName="eventCode" handleErrors>
+    </div>
+    <div class="col-50">
+      <p>Descripción Evento</p>
+      <input type="text" formControlName="eventDescription" handleErrors>
+    </div>
+
+    <div class="col-100">
+      <p>Descripción Larga del Evento</p>
+      <input type="text" formControlName="eventLargeDescription" handleErrors>
+    </div>
+
+    <div class="col-25">
+      <p>Indicador Evento Obligatorio</p>
+      <label>No</label>
+      <input type="radio" value="N" [checked]="true" formControlName="mandatoryEventInd">
+      <label>Sí</label>
+      <input type="radio" value="S" formControlName="mandatoryEventInd">
+    </div>
+    <div class="col-25">
+      <p>Carga de Trabajo</p>
+      <input type="text" formControlName="eventCharge" handleErrors>
+    </div>
+    <div class="col-25">
+      <p>Clase del Evento</p>
+      <select name="clevento" formControlName="eventClass" handleErrors>
+        <option 
+          *ngFor="let clevento of datosCombos['CLE']"
+          [value]="clevento.dataCode">
+          {{clevento.dataDescription}}
+        </option>
+      </select>
+    </div>
+    <div class="col-25">
+      <p>Complejidad del Evento</p>
+      <input type="text" maxlength=2 formControlName="eventComplexity" handleErrors>
+    </div>
+
+    <div class="col-25">
+      <p>Publicable</p>
+      <label>No</label>
+      <input type="radio" value="N" [checked]="true" formControlName="canBePublished">
+      <label>Sí</label>
+      <input type="radio" value="S" formControlName="canBePublished">
+    </div>
+    <div class="col-37">
+      <p>Tipo de Evento</p>
+      <select name="tievento" formControlName="eventType" handleErrors>
+        <option 
+          *ngFor="let tievento of datosCombos['TIE']"
+          [value]="tievento.dataCode">
+          {{tievento.dataDescription}}
+        </option>
+      </select>
+    </div>
+    <div class="col-37">
+      <p>Prioridad del Evento</p>
+      <select name="prioridad" formControlName="eventPriority" handleErrors>
+        <option 
+          *ngFor="let prioridad of datosCombos['PR']"
+          [value]="prioridad.dataCode">
+          {{prioridad.dataDescription}}
+        </option>
+      </select>
+    </div>
+  </div>
+</ng-container>

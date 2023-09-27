@@ -1,0 +1,8 @@
+<!-- bindeamos el siguiente div al formGroup principal -->
+<div [formGroup]="parent">
+  <p>PIZZA NAME </p>
+  <input type="text" 
+    formControlName="name"
+    placeholder="new pizza name">
+  <span class="error" *ngIf="required">Campo obligatorio</span>
+</div>

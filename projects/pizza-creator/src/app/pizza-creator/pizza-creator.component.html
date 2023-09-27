@@ -1,0 +1,5 @@
+<h1>Pizza Creator</h1>
+<div>
+    <app-pizza-form [toppings]="toppings$ | async" (add)="addPizza($event)"></app-pizza-form>
+    <app-pizza-list [pizzas]="pizzas$ | async"></app-pizza-list>
+</div>

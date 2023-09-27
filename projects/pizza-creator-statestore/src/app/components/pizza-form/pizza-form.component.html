@@ -1,0 +1,20 @@
+<h2>Formulario</h2>
+
+<p>TOPPINGS:</p>
+<span *ngFor="let topping of toppings" 
+  [class.active]="isActive(topping)"
+  (click)="selectToppings.emit(topping)" >[ {{topping}} ]
+</span>
+
+<p>PIZZA NAME:</p>
+<input type="text" placeholder="pizza name" (keyup)="0" #pizzaName>
+<button type="button"
+  (click)="onNewPizza(pizzaName.value); pizzaName.value=''"
+  [disabled]="pizzaName.value==='' || !selectedToppings.length">
+  Lanzar evento
+</button>
+
+<p>SELECTED TOPPINGS:</p>
+<div *ngIf="selectedToppings.length">
+  <p *ngFor="let topping of selectedToppings">{{topping}}</p>
+</div>

@@ -1,0 +1,14 @@
+<nav>
+  <a routerLink="/heroes">Heroes</a>
+  <a routerLink="/dashboard">Dashboard</a>
+</nav>
+<button (click)="stopSubscription()">Stop subscription</button>
+
+<div class="notification" [style.display]="(heroService.showNotifications$ | async) ? 'block' : 'none'">
+  <p>There's new data available. Click to reload the data.</p>
+  <button (click)="reload()">UPDATE</button>
+</div>
+
+<!-- <button (click)="reload()">Refresco manual</button> -->
+
+<router-outlet></router-outlet>

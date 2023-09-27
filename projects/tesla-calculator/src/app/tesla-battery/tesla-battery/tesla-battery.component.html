@@ -1,0 +1,4 @@
+<form [formGroup]="form">
+  <h1>{{ title }}</h1>
+  <app-tesla-car [wheelsize]="form.get('config.wheels').value"></app-tesla-car>
+</form>
