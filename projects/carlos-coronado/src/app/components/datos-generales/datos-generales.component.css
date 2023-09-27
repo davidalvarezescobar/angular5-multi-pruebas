@@ -4,6 +4,7 @@
 }
 nav {
   background-color: aliceblue;
+  padding: 4px;
 }
 .dropdown-toggle {
   border: 0;

@@ -7,8 +7,6 @@
 .error {
     border: 1px solid red;
 }
-::ng-deep .error ~ app-tooltip {
+::ng-deep .ng-invalid ~ app-tooltip {
     color: red;
-    top: 49px !important;
-    left: 10px !important;
 }

@@ -28,5 +28,39 @@
             "planDescription": "planDescription4",
             "borrame": "borralo"
         }
+    ],
+    "comboListResult": [
+        {
+            "comboCode": "MO",
+            "comboListData": [
+                { "dataCode": "mo1", "dataDescription": "mo1" },
+                { "dataCode": "mo2", "dataDescription": "mo2" },
+                { "dataCode": "mo3", "dataDescription": "mo3" }
+            ]
+        },
+        {
+            "comboCode": "PR",
+            "comboListData": [
+                { "dataCode": "pr1", "dataDescription": "pr1" },
+                { "dataCode": "pr2", "dataDescription": "pr2" },
+                { "dataCode": "pr3", "dataDescription": "pr3" }
+            ]
+        },
+        {
+            "comboCode": "TIE",
+            "comboListData": [
+                { "dataCode": "tie1", "dataDescription": "tie1" },
+                { "dataCode": "tie2", "dataDescription": "tie2" },
+                { "dataCode": "tie3", "dataDescription": "tie3" }
+            ]
+        },
+        {
+            "comboCode": "CLE",
+            "comboListData": [
+                { "dataCode": "cle1", "dataDescription": "cle1" },
+                { "dataCode": "cle2", "dataDescription": "cle2" },
+                { "dataCode": "cle3", "dataDescription": "cle3" }
+            ]
+        }
     ]
 }

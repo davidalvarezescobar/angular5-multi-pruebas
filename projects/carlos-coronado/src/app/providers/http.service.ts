@@ -62,6 +62,8 @@ export class HttpService {
         comboList: ['MO', 'PR', 'TIE', 'CLE']
       };
       this.combosEvento$ = this.http.post(url, params).pipe(
+        timeout(3000),
+        catchError(() => of(mocks)),
         map((res: any) => res?.comboListResult),
         map((arr: any[]) => {
           console.log('Array original:', arr);

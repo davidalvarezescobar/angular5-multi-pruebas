@@ -4,21 +4,20 @@
 </nav>
 
 <ng-container *ngIf="datosCombos$ | async as datosCombos">
-  <div class="container" *ngIf="toggle" [formGroup]="parent">
+  <div class="container" *ngIf="toggle" [formGroup]="subForm">
     <div class="col-25">
-      <p [tooltip]="'Descripción Motor'">Descripción Motor</p>
+      <p tooltip="Descripción Motor">Descripción Motor</p>
       <select name="motor" formControlName="motor" handleErrors>
      <!-- [value]="..." only supports string values
           [ngValue]="..." supports any type  -->
-        <option 
-          *ngFor="let motor of datosCombos['MO'] | orderBy: {property: 'dataDescription', direction: true}"
+        <option *ngFor="let motor of datosCombos['MO'] | orderBy: {property: 'dataDescription', direction: true}"
           [ngValue]="motor">
           {{motor.dataDescription}}
         </option>
       </select>
     </div>
     <div class="col-25">
-      <p [tooltip]="'Código evento'">Cód. Evento</p>
+      <p tooltip="Código evento">Cód. Evento</p>
       <input type="text" formControlName="eventCode" handleErrors>
     </div>
     <div class="col-50">
@@ -45,8 +44,7 @@
     <div class="col-25">
       <p>Clase del Evento</p>
       <select name="clevento" formControlName="eventClass" handleErrors>
-        <option 
-          *ngFor="let clevento of datosCombos['CLE']"
+        <option *ngFor="let clevento of datosCombos['CLE']"
           [value]="clevento.dataCode">
           {{clevento.dataDescription}}
         </option>
@@ -67,8 +65,7 @@
     <div class="col-37">
       <p>Tipo de Evento</p>
       <select name="tievento" formControlName="eventType" handleErrors>
-        <option 
-          *ngFor="let tievento of datosCombos['TIE']"
+        <option *ngFor="let tievento of datosCombos['TIE']"
           [value]="tievento.dataCode">
           {{tievento.dataDescription}}
         </option>
@@ -77,8 +74,7 @@
     <div class="col-37">
       <p>Prioridad del Evento</p>
       <select name="prioridad" formControlName="eventPriority" handleErrors>
-        <option 
-          *ngFor="let prioridad of datosCombos['PR']"
+        <option *ngFor="let prioridad of datosCombos['PR']"
           [value]="prioridad.dataCode">
           {{prioridad.dataDescription}}
         </option>

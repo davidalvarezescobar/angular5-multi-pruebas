@@ -6,7 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class OrderByPipe implements PipeTransform {
 
   transform(value: any, args?: any): any {
-    if (value === null) { return; }
+    if (value == null) { return; }
     return value.sort(function(a, b){
       let numberDirection = args.direction ? 1 : -1; // si recibimos un booleano lo convertimos a 1 ó -1
 

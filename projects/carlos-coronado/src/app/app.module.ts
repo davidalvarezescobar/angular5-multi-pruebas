@@ -15,7 +15,6 @@ import { BuscadorComponent } from './components/buscador/buscador.component';
 import { FaInputComponent } from './components/fa-input/fa-input.component';
 import { DirectivesModule } from './directives/directives.module';
 import { SharedComponentsModule } from './components/shared-components.module';
-import { StoreEventosService } from './providers/store.eventos.service';
 
 
 const routes: Routes = [
@@ -49,7 +48,6 @@ const routes: Routes = [
   ],
   providers: [
     HttpService,
-    StoreEventosService,
     PreloaderService,
     { provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true }
   ],

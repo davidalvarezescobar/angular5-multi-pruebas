@@ -1,4 +1,4 @@
-import { Directive, HostBinding, OnDestroy, OnInit, ViewContainerRef } from '@angular/core';
+import { Directive, OnDestroy, OnInit, ViewContainerRef } from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { takeWhile } from 'rxjs/operators';
 import { TooltipComponent } from '../components/tooltip/tooltip.component';
@@ -9,7 +9,6 @@ import { ValidationService } from '../providers/validation.service';
   selector: '[handleErrors]'
 })
 export class HandleErrorsDirective implements OnInit, OnDestroy {
-  @HostBinding('class.error') classError = false;
   private takeWhile = true;
 
   constructor(
@@ -17,7 +16,8 @@ export class HandleErrorsDirective implements OnInit, OnDestroy {
     private control: NgControl,
     private validation: ValidationService
   ) {
-    this.container.element.nativeElement.parentElement.style.position = 'relative';
+    // mejor que posicionamiento relativo, voy a utilizar posicionamiento absoluto:
+    // this.container.element.nativeElement.parentElement.style.position = 'relative';
   }
 
   ngOnInit() {
@@ -43,15 +43,18 @@ export class HandleErrorsDirective implements OnInit, OnDestroy {
     const errors = this.control.errors;
     for (const validatorType in errors) {
       if (errors.hasOwnProperty(validatorType)) {
+        const rect = this.container.element.nativeElement.getBoundingClientRect();
+        const offsetY = rect.top + window.pageYOffset;
+        const offsetX = rect.left;
+
         const componentRef = this.container.createComponent(TooltipComponent);
 
         componentRef.instance.msg = this.validation.getMessage(validatorType, errors[validatorType]);
-        // componentRef.instance.errorCss = true;
-        this.classError = true;
+        componentRef.instance.top = `${offsetY+25}px`;
+        componentRef.instance.left = `${offsetX}px`;
         return;
       }
     }
-    this.classError = false;
   }
 
 }

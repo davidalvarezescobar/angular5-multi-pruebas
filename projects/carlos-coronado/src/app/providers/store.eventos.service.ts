@@ -4,7 +4,9 @@ import { HttpService } from './http.service';
 import { initStore, StoreService } from './store.service';
 
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class StoreEventosService extends StoreService<any> {
 
   constructor(
