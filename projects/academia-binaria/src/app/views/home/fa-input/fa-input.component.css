@@ -1,14 +1,14 @@
-:host{
+:host {
     display: inline-block;
     border: 1px solid red;
     margin: 4px;
 }
 
-input{
-    border: none;
-    outline: none;
+:host.outline {
+    border: 1px solid blue;
 }
 
-:host(.outline){
-    border: 1px solid blue;
+input {
+    border: none;
+    outline: none;
 }

@@ -1,31 +1,53 @@
-<p>
-  home works! 
-  <a routerLink="/profile">Go profile</a>
-  <a routerLink="/operations">Go operations</a>
-</p>
+<p><b>Home page</b></p>
 
-<p> Componente fa-input
-  <fa-input *ngFor="let prop of inputProps"
-    [placeHolder]="prop.pHolder"
-    [icon]="prop.icon"
-    (value)="value=$event">
-  </fa-input>
-</p>
-<button (click)="add()">ADD</button>
-<div>Value obtenido: {{value}}</div>
+<section>
+  <nav>
+    <a routerLink="/profile"> >>> Go profile</a>
+    &nbsp;
+    <a routerLink="/operations"> >>> Go operations</a>
+  </nav>
+</section>
 
-<p> Componente fa-input mejorado con content projection
+<br>
+<small>Todos los inputs y select de este proyecto, funcionan sin usar Forms de Angular</small>
+
+<hr>
+
+<section>
+  <p>Componente fa-input:</p>
+  <label *ngFor="let prop of inputProps" style="display: block;">
+    {{prop.pHolder}}
+    <fa-input
+      [placeHolder]="prop.pHolder"
+      [icon]="prop.icon"
+      (value)="value=$event">
+    </fa-input>
+  </label>
+  <button (click)="add()">ADD</button>
+  <p>Value fa-input obtenido: {{value}}</p>
+</section>
+
+<hr>
+
+<section>
+  <p>Componente fa-input mejorado con content projection:</p>
+  <small>Impresionante mi directiva 'inputHandler' que propaga el evento 'onfocus' del input</small><br>
   <fa-input-better icon="envelope">
     <input type="email" placeholder="email" inputHandler>
   </fa-input-better>
-</p>
+</section>
 
-<p>Prueba de combo:</p>
-<!-- Binds the 'change event' to the number 0, it´s the shortest template statement possible. 
-     While the statement does nothing useful, it satisfies Angular's requirement so that Angular will update the screen: -->
-<select #combo (change)="0">
-  <option value="" disabled selected hidden>Choose...</option>
-  <option *ngFor="let prop of inputProps" [value]="prop.pHolder">{{prop.icon}}</option>
-</select>
-<div>Value obtenido: {{combo.value}}</div>
-<div>Text obtenido: {{combo.options[combo.selectedIndex].text}}</div>
+<hr>
+
+<section>
+  <p>Prueba de combo:</p>
+  <small>Ejemplo de cómo obtener el 'value' o el 'text' del option seleccionado, mediante las propiedades 'value' y 'options' del &lt;select&gt;</small><br>
+  <!-- Binds the 'change event' to the number 0, it´s the shortest template statement possible. 
+       While the statement does nothing useful, it satisfies Angular's requirement so that Angular will update the screen: -->
+  <select #combo (change)="0">
+    <option value="" disabled selected hidden>Selecciona...</option>
+    <option *ngFor="let prop of inputProps" [value]="prop.pHolder">{{prop.icon}}</option>
+  </select>
+  <div>Value obtenido: {{combo.value}}</div>
+  <div>Text obtenido: {{combo.options[combo.selectedIndex].text}}</div>
+</section>

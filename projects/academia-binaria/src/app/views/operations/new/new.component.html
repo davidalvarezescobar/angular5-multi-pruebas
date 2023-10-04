@@ -1,11 +1,12 @@
-<h2>{{title | uppercase}}</h2>
+<h3>{{title}}</h3>
+<small>Impresionante mi directiva 'formatearImporte' en el input 'Amount'</small>
 <form>
   <label for="description">Description</label>
   <input type="text" #inputDescription 
     [value]="operation.description" (input)="operation.description=inputDescription.value">
 
   <label for="amount">Amount</label>
-  <input type="text" #inputAmount formatearImporte
+  <input type="text" #inputAmount formatearImporte="5,2"
     [value]="operation.amount" (blur)="operation.amount=inputAmount.value">
 
   <label for="kind">Kind of operation</label>

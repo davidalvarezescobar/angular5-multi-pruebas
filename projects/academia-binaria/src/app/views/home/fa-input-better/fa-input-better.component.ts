@@ -1,9 +1,7 @@
 // tslint:disable-next-line:max-line-length
-import { Component, OnInit, Input, ContentChild, AfterContentInit, HostBinding, ChangeDetectorRef, AfterViewInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
+import { AfterContentInit, AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChild, HostBinding, Input, OnDestroy } from '@angular/core';
+import { addSubscription, cleanSubscriptions } from '../../../globals';
 import { InputHandlerDirective } from './input-handler.directive';
-import { cleanSubscriptions, addSubscription } from '../../../globals';
-import { timer } from 'rxjs';
-import { tap } from 'rxjs';
 
 
 @Component({
@@ -15,24 +13,20 @@ import { tap } from 'rxjs';
   styleUrls: ['./fa-input-better.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FaInputBetterComponent implements OnInit, AfterContentInit, AfterViewInit, OnDestroy {
+export class FaInputBetterComponent implements AfterContentInit, AfterViewInit, OnDestroy {
   @Input() icon: string;
 
   @ContentChild(InputHandlerDirective) input: InputHandlerDirective;
   @HostBinding('class.outline') focus = false;
 
-  constructor(private cdr: ChangeDetectorRef) { }
-
-  ngOnInit() {
-  }
+  constructor(
+    private cdr: ChangeDetectorRef
+  ) { }
 
   ngAfterContentInit() {
     const sub1$ = this.input.focus.subscribe(val => this.focus = val);
-    const sub2$ = timer(0, 2000).pipe(
-      tap(num => console.log('test:', num))
-    ).subscribe();
 
-    addSubscription(sub1$, sub2$);
+    addSubscription(sub1$);
   }
 
   ngAfterViewInit() {

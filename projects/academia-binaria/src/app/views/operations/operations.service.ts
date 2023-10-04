@@ -4,7 +4,9 @@ import { tap } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
 
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class OperationsService {
   private operations$ = new BehaviorSubject<Operation[]>([]);
 
@@ -12,7 +14,7 @@ export class OperationsService {
 
 
   getOperationsList() {
-    return this.operations$.asObservable().pipe(
+    return this.operations$.pipe(
       tap((val) => console.log(val))
     );
   }

@@ -1,3 +1,5 @@
+// helper que maneja las suscripciones a observables de toda la aplicación
+
 let subscriptions = [];
 export function cleanSubscriptions() {
     console.log(subscriptions);

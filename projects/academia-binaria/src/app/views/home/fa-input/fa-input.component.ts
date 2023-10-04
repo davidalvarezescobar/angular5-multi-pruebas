@@ -1,11 +1,11 @@
 // tslint:disable-next-line:max-line-length
-import { Component, OnInit, Input, Output, EventEmitter, HostBinding, ChangeDetectionStrategy, ChangeDetectorRef, AfterViewInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
 
 
 @Component({
   selector: 'fa-input',
   template: `
-    <i [class]="iClass"></i>
+    <i [class]="iconClass"></i>
     <input type="text" #input
         [placeholder]="pHolder"
         (focus)="focus=true"
@@ -15,7 +15,7 @@ import { Component, OnInit, Input, Output, EventEmitter, HostBinding, ChangeDete
   styleUrls: ['./fa-input.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FaInputComponent implements OnInit, AfterViewInit {
+export class FaInputComponent implements AfterViewInit {
 
   @Input() placeHolder: string;
   @Input() icon: string;
@@ -23,17 +23,16 @@ export class FaInputComponent implements OnInit, AfterViewInit {
 
   @HostBinding('class.outline') focus = false;
 
-  constructor(private cdr: ChangeDetectorRef) { }
-
-  ngOnInit() {
-  }
+  constructor(
+    private cdr: ChangeDetectorRef
+  ) { }
 
   ngAfterViewInit() {
     this.cdr.detach();
   }
 
-  get iClass() {
-    console.log('getter iClass', this.icon);
+  get iconClass() {
+    console.log('getter iconClass', this.icon);
     return `fa fa-${this.icon}`;
   }
 

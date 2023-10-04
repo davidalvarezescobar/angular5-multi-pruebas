@@ -1,6 +1,6 @@
-import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
-import { Operation } from '../operation';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { DecimalEspPipe } from '../../../shared/decimal-esp.pipe';
+import { Operation } from '../operation';
 
 @Component({
   selector: 'app-new',
@@ -10,21 +10,15 @@ import { DecimalEspPipe } from '../../../shared/decimal-esp.pipe';
     DecimalEspPipe
   ]
 })
-export class NewComponent implements OnInit {
+export class NewComponent {
   @Input() numberOfOperations = 0;
   @Output() save = new EventEmitter();
 
-  title = 'Cash Flow';
+  title = 'Componente "app-new":';
   kindsOfOperations = ['Income', 'Expense'];
   operation: Operation = new Operation();
 
-  constructor(
-    private decimalEspPipe: DecimalEspPipe
-  ) { }
-
-  ngOnInit() {
-    // this.operation.amount = this.decimalEspPipe.transform( '0' );
-  }
+  constructor() { }
 
   saveOperation() {
     this.save.emit(this.operation);

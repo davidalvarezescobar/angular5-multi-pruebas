@@ -1,3 +1,4 @@
+<h3>Componente "app-list":</h3>
 <table *ngIf="numberOfOperations > 0; else emptyList">
   <thead>
     <th>Description</th>
@@ -17,6 +18,7 @@
     </tr>
   </tbody>
 </table>
+
 <ng-template #emptyList>
   <h3>No data</h3>
 </ng-template>

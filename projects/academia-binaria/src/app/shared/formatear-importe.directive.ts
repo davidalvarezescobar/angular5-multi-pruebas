@@ -1,4 +1,4 @@
-import { Directive, HostListener, ElementRef } from '@angular/core';
+import { Directive, HostListener, ElementRef, Input } from '@angular/core';
 import { DecimalEspPipe } from './decimal-esp.pipe';
 import { MascaraImportePipe } from './mascara-importe.pipe';
 
@@ -10,6 +10,7 @@ import { MascaraImportePipe } from './mascara-importe.pipe';
   ]
 })
 export class FormatearImporteDirective {
+  @Input('formatearImporte') mascara = '15,2';
 
   constructor(
     private el: ElementRef,
@@ -26,7 +27,7 @@ export class FormatearImporteDirective {
   }
 
   @HostListener('input') onInput() {
-    this.el.nativeElement.value = this.mascaraImporte.transform( this.el.nativeElement.value, '15,2' );
+    this.el.nativeElement.value = this.mascaraImporte.transform( this.el.nativeElement.value, this.mascara );
   }
 
   // Con el evento keyup, corregiría después de cada pulsación

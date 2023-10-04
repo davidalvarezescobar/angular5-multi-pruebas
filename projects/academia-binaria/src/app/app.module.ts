@@ -1,11 +1,10 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { ComponentsModule } from './components/components.module';
 import { HomeModule } from './views/home/home.module';
-import { OperationsService } from './views/operations/operations.service';
 
 
 @NgModule({
@@ -18,7 +17,6 @@ import { OperationsService } from './views/operations/operations.service';
     ComponentsModule,
     HomeModule
   ],
-  providers: [OperationsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

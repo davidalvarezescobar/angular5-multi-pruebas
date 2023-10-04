@@ -19,8 +19,9 @@ import { Observable } from 'rxjs'
 export class OperationsComponent implements OnInit {
   operations$: Observable<Operation[]>;
 
-  constructor(private operationsService: OperationsService) {
-  }
+  constructor(
+    private operationsService: OperationsService
+  ) { }
 
   ngOnInit() {
     this.operations$ = this.operationsService.getOperationsList();
