@@ -1,0 +1,31 @@
+<ng-container [formGroup]="customerDetails">
+  <div class="row">
+    <h3>
+      Customer Details
+    </h3>
+    <div>
+      <input placeholder="First Name" formControlName="firstName" />
+    </div>
+    <div>
+      <input placeholder="Last Name" formControlName="lastName" />
+    </div>
+    <div>
+      <input placeholder="Phone Number" formControlName="phoneNumber" />
+    </div>
+  </div>
+
+  <div class="row" formGroupName="address">
+    <h3>
+      Delivery Address
+    </h3>
+    <div>
+      <input placeholder="Street" formControlName="street" />
+    </div>
+    <div>
+      <input placeholder="Apt. Number" formControlName="houseNum" />
+    </div>
+    <div>
+      <input placeholder="City" formControlName="city" />
+    </div>
+  </div>
+</ng-container>

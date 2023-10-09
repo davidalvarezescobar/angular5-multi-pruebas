@@ -1,0 +1,30 @@
+<div class="container content" [formGroup]="form">
+  <div *ngIf="form.errors?.['noPizzas'] && form.dirty">
+    {{form.errors?.['noPizzas'].message}}
+  </div>
+  <div class="row">
+    <div class="col-md-8">
+      <div class="row">{{selectedPizzaGroup}}
+        <app-selected-pizza-viewer (addPizza)="onAddPizza()" [selectedPizzaGroup]="selectedPizzaGroup">
+        </app-selected-pizza-viewer>
+      </div>
+
+      <div class="row">
+        <app-customer-details></app-customer-details>
+      </div>
+      <div class="row">
+        <button (click)="submit(form.value)">SUBMIT</button>
+        <button (click)="reset()">RESET</button>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <app-pizza-list
+        (addPizza)="onAddPizza()"
+        (pizzaSelected)="onSelectPizza($event)"
+        (deletePizza)="onDeletePizza($event)">
+      </app-pizza-list>
+    </div>
+  </div>
+</div>
+
+<pre>{{form.value | json}}</pre>

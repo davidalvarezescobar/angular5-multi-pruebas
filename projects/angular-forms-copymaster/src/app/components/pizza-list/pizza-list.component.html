@@ -1,0 +1,25 @@
+
+<div class="row" [formGroup]="group">
+  <div class="col-md-12">
+    <div class="PizzaList">
+      <div class="PizzaList__title">
+        <h2>
+          Pizzas order
+        </h2>
+      </div>
+      <div class="PizzaList__content" formArrayName="pizzas">
+        <div class="PizzaList__item" *ngFor="let pizza of pizzasArray; let i = index;"
+             [ngClass]="getPizzaListItemClassStates(pizza, i)"
+             (click)="pizzaSelected.emit(i)"
+             [formGroup]="pizza">
+          <span>
+            {{getPizzaTitle(pizza.value)}}
+          </span>
+          <button (click)="deletePizza.emit(i); $event.stopPropagation()">Delete</button>
+        </div>
+
+        <button (click)="addPizza.emit()">Add</button>
+      </div>
+    </div>
+  </div>
+</div>

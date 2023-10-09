@@ -1,0 +1,12 @@
+.pizza-size-picker {
+
+  &:hover {
+    cursor: pointer;
+    background: #dac9ff;
+  }
+
+  &.active {
+    background: #673ab7;
+    color: white;
+  }
+}

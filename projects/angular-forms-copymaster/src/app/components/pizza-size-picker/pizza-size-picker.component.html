@@ -1,1 +1,8 @@
-<p>pizza-size-picker works!</p>
+<div class="row">
+  <button class="pizza-size-picker" [class.active]="pizzaSize === PizzaSizeEnum.SMALL"
+    (click)="changeSize(PizzaSizeEnum.SMALL)">SMALL</button>
+  <button class="pizza-size-picker" [class.active]="pizzaSize === PizzaSizeEnum.MEDIUM"
+    (click)="changeSize(PizzaSizeEnum.MEDIUM)">MEDIUM</button>
+  <button class="pizza-size-picker" [class.active]="pizzaSize === PizzaSizeEnum.LARGE"
+    (click)="changeSize(PizzaSizeEnum.LARGE)">LARGE</button>
+</div>

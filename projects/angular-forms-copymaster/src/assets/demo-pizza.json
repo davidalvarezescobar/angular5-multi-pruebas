@@ -1,0 +1,23 @@
+{
+    "customerDetails": {
+        "address": {
+            "floor": 1,
+            "street": "Test street",
+            "houseNum": "44",
+            "city": "New York"
+        },
+        "lastName": "Lover",
+        "firstName": "Pizza",
+        "phoneNumber": "100100100"
+    },
+    "pizzas": [
+        {
+            "toppings": [
+                "BACON",
+                "MUSHROOMS",
+                "OLIVES"
+            ],
+            "size": 2
+        }
+    ]
+}
