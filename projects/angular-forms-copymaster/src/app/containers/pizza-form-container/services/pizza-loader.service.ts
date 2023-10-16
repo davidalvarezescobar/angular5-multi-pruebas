@@ -26,7 +26,6 @@ export class PizzaLoaderService {
         toppings: this.prefillToppingsSelection(group.get('toppings').value, pizza.toppings)
       });
     }
-    this.pizzaFormService.setCurrentPizza();
   }
 
   prefillToppingsSelection(toppings: IToppingItem[], selectedToppings: string[]): IToppingItem[] {

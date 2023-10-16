@@ -29,11 +29,9 @@ export class PizzaFormService {
     });
   }
 
-  get pizzas(): FormArray {
-    return this.form.get('pizzas') as FormArray;
-  }
+  isValid(): boolean {
+    this.form.markAsDirty();
 
-  get isValid(): boolean {
     if (!this.form.valid) {
       this.pizzaValidatorsService.validateAllFormFields(this.form);
       return false;
@@ -42,21 +40,27 @@ export class PizzaFormService {
     return true;
   }
 
-  get currentPizza(): number {
+  get pizzas(): FormArray {
+    return this.form.get('pizzas') as FormArray;
+  }
+
+  get selectedPizza(): number {
     return this.form.get('selectedPizza').value;
   }
 
+  set selectedPizza(index: number) {
+    this.form.get('selectedPizza').setValue(index);
+  }
+
   addPizza(): FormGroup {
+    this.form.markAsDirty();
+
     const pizzaGroup = this.createPizzaGroup();
     this.pizzas.push(pizzaGroup);
 
-    this.form.markAsDirty();
+    this.selectedPizza = this.pizzas.length - 1;
 
     return pizzaGroup;
-  }
-
-  setCurrentPizza(index: number = this.pizzas.length - 1) {
-    this.form.get('selectedPizza').setValue(index);
   }
 
   createPizzaGroup(size: PizzaSizeEnum = PizzaSizeEnum.MEDIUM): FormGroup {
@@ -69,10 +73,10 @@ export class PizzaFormService {
   }
 
   deletePizza(index: number): void {
-    this.pizzas.removeAt(index);
-    const currentPizza = this.currentPizza > 0 ? this.currentPizza-1 : null;
-    this.setCurrentPizza(currentPizza);
     this.form.markAsDirty();
+
+    this.pizzas.removeAt(index);
+    this.selectedPizza = this.selectedPizza > 0 ? --this.selectedPizza : null;
   }
 
   createPizzaOrderDto(data: IPizzaFormInterface): IPizzaFormInterface {

@@ -21,10 +21,11 @@ export class PizzaFormContainerComponent implements OnInit {
     return this.pizzaFormService.form;
   }
 
-  get selectedPizzaGroup(): FormGroup | null {
+  get selectedPizza(): FormGroup | null {
     if (!this.pizzaFormService.pizzas.length) return null;
 
-    return this.pizzaFormService.pizzas.at(this.form.get('selectedPizza').value) as FormGroup;
+    // obtenemos la pizza sobre la que estamos trabajando (recuerda que la pizaa es un FormGroup formado por 'size' y 'toppings'):
+    return this.pizzaFormService.pizzas.at(this.pizzaFormService.selectedPizza) as FormGroup;
   }
 
   constructor(
@@ -33,36 +34,27 @@ export class PizzaFormContainerComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // here you can check the page url if a pizza order id was specified
-    // and load it from the server
     if (this.editMode) {
       this.pizzaLoaderService.loadPizzaData();
     }
   }
 
-  onAddPizza() {
-    this.pizzaFormService.addPizza();
-    this.pizzaFormService.setCurrentPizza();
-  }
-
-  async submit(data: IPizzaFormInterface) {
-    if (!this.pizzaFormService.isValid) {
+  submit(data: IPizzaFormInterface) {
+    if (!this.pizzaFormService.isValid()) {
       return;
     }
 
     const order: IPizzaFormInterface = this.pizzaFormService.createPizzaOrderDto(data);
 
     alert(`Thanks ${order.customerDetails.firstName}, the pizza is on the way!`);
-
-    if (this.editMode) {
-      // update api endpoint call
-    } else {
-      // create api endpoint call
-    }
   }
 
   reset() {
     this.pizzaFormService.resetForm();
+  }
+
+  onAddPizza() {
+    this.pizzaFormService.addPizza();
   }
 
   onDeletePizza(index: number) {
@@ -70,6 +62,6 @@ export class PizzaFormContainerComponent implements OnInit {
   }
 
   onSelectPizza(index: number) {
-    this.pizzaFormService.setCurrentPizza(index);
+    this.pizzaFormService.selectedPizza = index;
   }
 }

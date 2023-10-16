@@ -1,11 +1,11 @@
 <div class="container content" [formGroup]="form">
-  <div *ngIf="form.errors?.['noPizzas'] && form.dirty">
-    {{form.errors?.['noPizzas'].message}}
-  </div>
+  <h4 *ngIf="form.errors?.['noPizzas'] && form.dirty" style="color: red;">{{form.errors?.['noPizzas'].message}}</h4>
+
   <div class="row">
     <div class="col-md-8">
-      <div class="row">{{selectedPizzaGroup}}
-        <app-selected-pizza-viewer (addPizza)="onAddPizza()" [selectedPizzaGroup]="selectedPizzaGroup">
+      <div class="row">
+        <!-- recoge los datos de la pizza actual: -->
+        <app-selected-pizza-viewer (addPizza)="onAddPizza()" [selectedPizza]="selectedPizza">
         </app-selected-pizza-viewer>
       </div>
 

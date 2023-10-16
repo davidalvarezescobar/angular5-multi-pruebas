@@ -7,17 +7,18 @@ import { FormArray, FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./selected-pizza-viewer.component.scss']
 })
 export class SelectedPizzaViewerComponent {
-  @Input() selectedPizzaGroup: FormGroup;
+  @Input() selectedPizza: FormGroup;
   @Output() addPizza = new EventEmitter();
 
   get toppingsArray(): FormGroup[] | [] {
-    if (!this.selectedPizzaGroup) return [];
+    if (!this.selectedPizza) return [];
 
-    return (this.selectedPizzaGroup.get('toppings') as FormArray).controls as FormGroup[];
+    return (this.selectedPizza.get('toppings') as FormArray).controls as FormGroup[];
   }
 
-  getFormControl(group: FormGroup, ctrlName: string): FormControl {
-    return group.get(ctrlName) as FormControl;
-  }
+  // SÓLO se utiliza si elegimos la OPCIÓN 1 de la template HTML:
+  // getFormControl(group: FormGroup, ctrlName: string): FormControl {
+  //   return group.get(ctrlName) as FormControl;
+  // }
 
 }
