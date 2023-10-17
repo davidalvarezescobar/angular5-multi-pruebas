@@ -1,7 +1,5 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { PizzaService } from '../pizza.service';
-import { Pizza, Topping } from '../pizza.interface';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-pizza-creator',
@@ -13,7 +11,9 @@ export class PizzaCreatorComponent implements OnInit {
   pizzas$;
   toppings$;
 
-  constructor(private pizzaService: PizzaService) { }
+  constructor(
+    private pizzaService: PizzaService
+  ) { }
 
   ngOnInit() {
     this.pizzas$ = this.pizzaService.select('pizzas');

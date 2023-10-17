@@ -1,6 +1,6 @@
-import { Component, OnInit, Input, ChangeDetectionStrategy, EventEmitter, Output } from '@angular/core';
-import { Topping } from '../pizza.interface';
-import { FormGroup, FormBuilder, FormArray, FormControl, Validators } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Topping } from '../pizza.service';
 import { PizzaValidator } from '../pizza.validator';
 
 @Component({
@@ -14,20 +14,19 @@ export class PizzaFormComponent implements OnInit {
   @Output() add = new EventEmitter();
 
   form: FormGroup;
-  private _selectedToppings: FormArray;
 
   constructor(
     private _fb: FormBuilder
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.form = this._fb.group({
-      name: ['', Validators.required],
+      name: this._fb.control('', { validators: Validators.required, nonNullable: true }),
       toppings: this._fb.array([], Validators.required)
     },
-    {
-      validator: PizzaValidator
-    });
+      {
+        validators: PizzaValidator
+      });
   }
 
   get selectedToppings() {
@@ -47,13 +46,13 @@ export class PizzaFormComponent implements OnInit {
     this.selectedToppings.removeAt(index);
   }
 
-  private addTopping(topping) {
+  addTopping(topping) {
     this.selectedToppings.push(new FormControl(topping));
   }
 
   onSubmit() {
     this.form['submitted'] = true;  // apaño para realizar las validaciones sólo cuando hacemos submit
-    console.log('Datos FORM:', this.form);
+    console.log('Datos FORM on Submit:', this.form);
 
     if (this.form.valid) {
       this.add.emit(this.form.value);
@@ -61,10 +60,7 @@ export class PizzaFormComponent implements OnInit {
       // Borramos el todo el contenido del formArray.
       // Con 'this.form.reset()' vaciaríamos cada uno de los formControl que hubiera en el array,
       // pero el array seguiría teniendo el mismo número de elementos.
-      const tamToppingsArray = this.selectedToppings.length;
-      for (let index=tamToppingsArray-1; index >= 0; index-- ) {
-        this.selectedToppings.removeAt(index);
-      }
+      this.selectedToppings.clear();
       // borramos el contenido del formControl 'name'
       this.form.reset();
     }

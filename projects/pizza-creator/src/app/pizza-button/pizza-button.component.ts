@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { ControlContainer, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-pizza-button',
@@ -7,10 +7,14 @@ import { FormGroup } from '@angular/forms';
   styleUrls: ['./pizza-button.component.less']
 })
 export class PizzaButtonComponent implements OnInit {
-  @Input() parent: FormGroup;
+  parent: FormGroup;
 
-  constructor() { }
+  constructor(
+    readonly controlContainer: ControlContainer
+  ) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.parent = this.controlContainer.control as FormGroup;
+  }
 
 }

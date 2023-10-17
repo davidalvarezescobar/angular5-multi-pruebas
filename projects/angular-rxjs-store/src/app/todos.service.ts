@@ -1,7 +1,6 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Todo } from './todo.model';
-import {shareReplay} from 'rxjs/operators'
+import { Injectable } from '@angular/core';
+import { Todo } from './todos-store.service';
 
 @Injectable()
 export class TodosService {

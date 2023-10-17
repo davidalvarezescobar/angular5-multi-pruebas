@@ -1,31 +1,52 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject} from 'rxjs'
-import {shareReplay, map} from 'rxjs/operators'
+import { BehaviorSubject, MonoTypeOperatorFunction, Observable } from 'rxjs'
+import { shareReplay, map, tap, filter, ignoreElements } from 'rxjs/operators'
 import { uuid } from './uuid';
-import { Todo } from './todo.model';
-import {TodosService} from './todos.service';
+import { TodosService } from './todos.service';
+
+export interface Todo {
+  id?: string;
+  title: string;
+  isCompleted: boolean;
+}
+
+export function initStore<T>(fn: Function): MonoTypeOperatorFunction<T> {
+  return (source: Observable<T>) => source.pipe(
+    tap(storeData => {
+      if (storeData === undefined) {
+        fn().subscribe();
+      }
+    }),
+    shareReplay(1),
+    filter(Boolean),
+    tap(x => console.log('obtenido del store: ', x))
+  );
+}
+
 
 @Injectable()
 export class TodosStoreService {
 
+  constructor(
+    private todosService: TodosService
+  ) { }
 
-  constructor(private todosService: TodosService) {
-    this.fetchAll();
+  // - Create one BehaviorSubject per store entity, for example if you have TodoGroups
+  private readonly _todos = new BehaviorSubject<Todo[] | undefined>(undefined);
+
+  readonly todos$ = this._todos.pipe(
+    initStore(() => this.fetchAllTodos())
+  );
+
+  get todos(): Todo[] {
+    return this._todos.getValue();
   }
 
-  // - We set the initial state in BehaviorSubject's constructor
-  // - Nobody outside the Store should have access to the BehaviorSubject 
-  //   because it has the write rights
-  // - Writing to state should be handled by specialized Store methods (ex: addTodo, removeTodo, etc)
-  // - Create one BehaviorSubject per store entity, for example if you have TodoGroups
-  //   create a new BehaviorSubject for it, as well as the observable$, and getters/setters
-  private readonly _todos = new BehaviorSubject<Todo[]>([]);
-
-  // Expose the observable$ part of the _todos subject (read only stream)
-  readonly todos$ = this._todos.asObservable();
+  set todos(val: Todo[]) {
+    this._todos.next(val);
+  }
 
 
-  // we'll compose the todos$ observable with map operator to create a stream of only completed todos
   readonly completedTodos$ = this.todos$.pipe(
     map(todos => todos.filter(todo => todo.isCompleted))
   );
@@ -34,107 +55,78 @@ export class TodosStoreService {
     map(todos => todos.filter(todo => !todo.isCompleted))
   );
 
-  // the getter will return the last value emitted in _todos subject
-  get todos(): Todo[] {
-    return this._todos.getValue();
-  }
-
-
-  // assigning a value to this.todos will push it onto the observable 
-  // and down to all of its subsribers (ex: this.todos = [])
-  set todos(val: Todo[]) {
-    this._todos.next(val);
-  }
-
-  async addTodo(title: string) {
-
+  addTodo(title: string) {
     if (title && title.length) {
-
-      // This is called an optimistic update
-      // updating the record locally before actually getting a response from the server
-      // this way, the interface seems blazing fast to the enduser
-      // and we just assume that the server will return success responses anyway most of the time.
-      // if server returns an error, we just revert back the changes in the catch statement 
+      // This is an optimistic update
+      // actualizamos el registro localmente antes de recibir una respuesta del servidor
+      // de esta manera, la interfaz parece extremadamente rápida para el usuario
+      // y simplemente asumimos que el servidor devolverá respuestas exitosas la mayoría del tiempo.
+      // si el servidor devuelve un error, revertimos los cambios en la declaración catch.
 
       const tmpId = uuid();
-      const tmpTodo = {id: tmpId, title, isCompleted: false};
+      const tmpTodo = { id: tmpId, title, isCompleted: false };
 
-      this.todos = [
-        ...this.todos,
-        tmpTodo
-      ];
+      this.todos = [...this.todos, tmpTodo];
 
-      try {
-        const todo = await this.todosService
-          .create({title, isCompleted: false})
-          .toPromise();
-
-        // we swap the local tmp record with the record from the server (id must be updated)
-        const index = this.todos.indexOf(this.todos.find(t => t.id === tmpId));
-        this.todos[index] = {
-          ...todo
-        };
-        this.todos = [...this.todos];
-      } catch (e) {
-        // is server sends back an error, we revert the changes
-        console.error(e);
-        this.removeTodo(tmpId, false);
-      }
-
+      this.todosService.create({ title, isCompleted: false }).subscribe({
+        next: todo => {
+          // we swap the local tmp record with the record from the server (id must be updated)
+          const index = this.todos.indexOf(this.todos.find(t => t.id === tmpId));
+          this.todos[index] = { ...todo };
+          this.todos = [...this.todos];
+        },
+        error: err => {
+          // is server sends back an error, we revert the changes
+          console.error(err);
+          this.removeTodo(tmpId, false);
+        }
+      });
     }
 
   }
 
-  async removeTodo(id: string, serverRemove = true) {
-    // optimistic update
+  removeTodo(id: string, serverRemove = true) {
     const todo = this.todos.find(t => t.id === id);
     this.todos = this.todos.filter(todo => todo.id !== id);
-
-    if(serverRemove) {
-      try {
-        await this.todosService.remove(id).toPromise();
-      } catch (e) {
-        console.error(e);
-        this.todos = [...this.todos, todo];
-      }
+    
+    if (serverRemove) {
+      // optimistic update
+      this.todosService.remove(id).subscribe({
+        error: err => {
+          console.error(err);
+          this.todos = [...this.todos, todo];
+        }
+      });
 
     }
 
   }
 
-  async setCompleted(id: string, isCompleted: boolean) {
+  setCompleted(id: string, isCompleted: boolean) {
     let todo = this.todos.find(todo => todo.id === id);
 
-    if(todo) {
+    if (todo) {
       // optimistic update
       const index = this.todos.indexOf(todo);
-
-      this.todos[index] = {
-        ...todo,
-        isCompleted
-      }
-
+      this.todos[index] = { ...todo, isCompleted };
       this.todos = [...this.todos];
 
-      try {
-        await this.todosService
-          .setCompleted(id, isCompleted)
-          .toPromise();
-
-      } catch (e) {
-
-        console.error(e);
-        this.todos[index] = {
-          ...todo,
-          isCompleted: !isCompleted
+      this.todosService.setCompleted(id, isCompleted).subscribe({
+        error: err => {
+          console.error(err);
+          this.todos[index] = { ...todo, isCompleted: !isCompleted };
         }
-      }
+      });
     }
   }
 
 
-  async fetchAll() {
-    this.todos = await this.todosService.index().toPromise();
+  fetchAllTodos() {
+    // una vez obtenidos los datos iniciales, son seteados en el store
+    return this.todosService.index().pipe(
+      tap((data: any) => this.todos = data),
+      ignoreElements()
+    );;
   }
 
 }

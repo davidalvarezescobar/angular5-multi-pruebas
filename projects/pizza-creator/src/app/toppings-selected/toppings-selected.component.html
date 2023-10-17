@@ -1,7 +1,7 @@
 <div [formGroup]="parent">
-  <p>TOPPINGS SELECTED: </p>
+  <h4>TOPPINGS SELECTED: </h4>
   <div formArrayName="toppings">
-    <p *ngFor="let topping of selected; let i=index;" [formGroupName]="i">
+    <p *ngFor="let topping of selected; let i=index;"[formGroupName]="i">
       <span>{{topping}}</span>
       <span (click)="remove.emit(i)">X</span>
     </p>

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
-import { Topping } from '../pizza.interface';
-import { FormGroup } from '@angular/forms';
+import { ControlContainer, FormGroup } from '@angular/forms';
+import { Topping } from '../pizza.service';
 
 @Component({
   selector: 'app-toppings-selected',
@@ -8,12 +8,17 @@ import { FormGroup } from '@angular/forms';
   styleUrls: ['./toppings-selected.component.less']
 })
 export class ToppingsSelectedComponent implements OnInit {
-  @Input() parent: FormGroup;
+  parent: FormGroup;
+  
   @Input() selected: Topping[];
   @Output() remove = new EventEmitter();
 
-  constructor() { }
+  constructor(
+    readonly controlContainer: ControlContainer
+  ) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.parent = this.controlContainer.control as FormGroup;
+  }
 
 }

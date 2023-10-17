@@ -15,17 +15,17 @@ export class PizzaFormService {
       selectedPizza: null,
       pizzas: this.fb.array([]),
       customerDetails: this.fb.group({
-        firstName: ['', { validators: Validators.required, initialValueIsDefault: true }],
-        lastName: ['', { validators: Validators.required, initialValueIsDefault: true }],
-        phoneNumber: ['', { validators: Validators.required, initialValueIsDefault: true }],
+        firstName: ['', { validators: Validators.required, nonNullable: true }],
+        lastName: ['', { validators: Validators.required, nonNullable: true }],
+        phoneNumber: ['', { validators: Validators.required, nonNullable: true }],
         address: this.fb.group({
-          street: ['', { validators: Validators.required, initialValueIsDefault: true }],
-          houseNum: ['', { validators: Validators.required, initialValueIsDefault: true }],
-          city: ['', { validators: Validators.required, initialValueIsDefault: true }]
+          street: ['', { validators: Validators.required, nonNullable: true }],
+          houseNum: ['', { validators: Validators.required, nonNullable: true }],
+          city: ['', { validators: Validators.required, nonNullable: true }]
         })
       })
     }, {
-      validator: this.pizzaValidatorsService.formValidator()
+      validators: this.pizzaValidatorsService.formValidator()
     });
   }
 

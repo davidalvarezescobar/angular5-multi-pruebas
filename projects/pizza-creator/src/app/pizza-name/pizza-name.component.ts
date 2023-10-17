@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { ControlContainer, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-pizza-name',
@@ -7,11 +7,15 @@ import { FormGroup } from '@angular/forms';
   styleUrls: ['./pizza-name.component.less']
 })
 export class PizzaNameComponent implements OnInit {
-  @Input() parent: FormGroup;
+  parent: FormGroup;
 
-  constructor() { }
+  constructor(
+    readonly controlContainer: ControlContainer
+  ) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.parent = this.controlContainer.control as FormGroup;
+  }
 
   get required() {
     return this.parent.get('name').hasError('required') && this.parent['submitted'];

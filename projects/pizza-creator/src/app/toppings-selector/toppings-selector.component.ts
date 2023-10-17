@@ -1,22 +1,26 @@
-import { Component, OnInit, Input, EventEmitter, Output, ChangeDetectionStrategy } from '@angular/core';
-import { Topping } from '../pizza.interface';
-import { FormGroup } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ControlContainer, FormGroup } from '@angular/forms';
+import { Topping } from '../pizza.service';
 
 @Component({
   selector: 'app-toppings-selector',
   templateUrl: './toppings-selector.component.html',
-  styleUrls: ['./toppings-selector.component.less']
-  // changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./toppings-selector.component.less'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ToppingsSelectorComponent implements OnInit {
-  @Input() parent: FormGroup;
-  @Input() toppings: Topping[]; // array con todos los toppings
-  @Input() selected: Topping[]; // array con los toppings seleccionados
-  @Output() select = new EventEmitter();
+  parent: FormGroup;
 
-  constructor() { }
+  @Input() toppings: Topping[]; // array con TODOS los toppings obtenidos desde Back
+  @Input() selected: Topping[]; // array con los toppings SELECCIONADOS (los que se van añadiendo al FormArray)
+  @Output() select = new EventEmitter<Topping>();
+
+  constructor(
+    readonly controlContainer: ControlContainer
+  ) { }
 
   ngOnInit() {
+    this.parent = this.controlContainer.control as FormGroup;
   }
 
   onSelect(topping) {

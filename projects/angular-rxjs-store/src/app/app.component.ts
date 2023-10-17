@@ -15,7 +15,9 @@ export class AppComponent  {
   todosTrackFn = (i, todo) => todo.id;
 
 
-  constructor(public todosStore: TodosStoreService) {}
+  constructor(
+    public todosStore: TodosStoreService
+  ) { }
 
   onAddTodo(title: string){
     this.todosStore.addTodo(title); 
