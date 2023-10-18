@@ -1,6 +1,4 @@
-import { Component, ChangeDetectionStrategy, OnInit, Output, EventEmitter } from '@angular/core';
-import { Observable } from 'rxjs';
-import { PreloaderService } from './preloader.service';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { PizzaStoreService } from './pizza-store.service';
 
 @Component({
@@ -16,19 +14,13 @@ export class AppComponent implements OnInit {
   isLoading: boolean;
 
   constructor(
-    public pizzaStore: PizzaStoreService,
-    private preloaderSrv: PreloaderService
+    public pizzaStore: PizzaStoreService
   ) {}
 
   ngOnInit() {
     this.pizzas$ = this.pizzaStore.select('pizzas');
     this.toppings$ = this.pizzaStore.select('toppings');
     this.selectedToppings$ = this.pizzaStore.select('selectedToppings');
-
-    this.preloaderSrv.observable$.subscribe(loading => {
-      this.isLoading = loading;
-      console.log(loading);
-    });
   }
 
   onSelectTopping(topping) {
@@ -36,7 +28,7 @@ export class AppComponent implements OnInit {
   }
 
   onNewPizza(newPizza) {
-    this.pizzaStore.add('pizzas', newPizza);
+    this.pizzaStore.addPizza(newPizza);
     this.pizzaStore.reset('selectedToppings');
   }
 

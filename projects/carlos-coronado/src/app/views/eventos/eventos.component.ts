@@ -27,11 +27,11 @@ export class EventosComponent implements OnInit {
     this.initStream();
     
     // esta línea es sólo por comprobar que el 'shareReplay' del 'store', funciona
-    this.eventosService.getStore().subscribe();
+    this.eventosService.getState().subscribe();
   }
 
   initStream() {
-    const initialStream$ = this.eventosService.getStore().pipe(
+    const initialStream$ = this.eventosService.getState().pipe(
       tap(x => console.log('todas los datos vienen por este stream: ', x))
     );
     const searchStream$ = this.searchStream.pipe(

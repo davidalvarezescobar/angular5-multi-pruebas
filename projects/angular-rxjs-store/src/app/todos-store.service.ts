@@ -10,15 +10,15 @@ export interface Todo {
   isCompleted: boolean;
 }
 
-export function initStore<T>(fn: Function): MonoTypeOperatorFunction<T> {
+export function initState<T>(fn: Function): MonoTypeOperatorFunction<T> {
   return (source: Observable<T>) => source.pipe(
-    tap(storeData => {
-      if (storeData === undefined) {
-        fn().subscribe();
+    tap(stateData => {
+      if (stateData === undefined) {
+        fn().pipe(ignoreElements()).subscribe();
       }
     }),
     shareReplay(1),
-    filter(Boolean),
+    filter(stateData => stateData !== undefined),
     tap(x => console.log('obtenido del store: ', x))
   );
 }
@@ -35,7 +35,7 @@ export class TodosStoreService {
   private readonly _todos = new BehaviorSubject<Todo[] | undefined>(undefined);
 
   readonly todos$ = this._todos.pipe(
-    initStore(() => this.fetchAllTodos())
+    initState(() => this.fetchAllTodos())
   );
 
   get todos(): Todo[] {
@@ -124,9 +124,8 @@ export class TodosStoreService {
   fetchAllTodos() {
     // una vez obtenidos los datos iniciales, son seteados en el store
     return this.todosService.index().pipe(
-      tap((data: any) => this.todos = data),
-      ignoreElements()
-    );;
+      tap((data: any) => this.todos = data)
+    );
   }
 
 }

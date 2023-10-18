@@ -25,7 +25,7 @@ export class PizzaService {
   select(name) {
     return this.store$.pipe(
       tap(_ => console.log('store:', _)),
-      map((storeData: State) => storeData?.[name]),
+      map((stateData: State) => stateData?.[name]),
       // distinctUntilChanged() va detrás del map(), ya que
       // si lo ponemos en la línea 28: "store$ = this._subject$.asObservable().pipe(distinctUntilChanged())"
       // no tiene el efecto deseado sobre el stream de datos:

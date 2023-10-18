@@ -1,36 +1,36 @@
-import { BehaviorSubject, filter, Observable, shareReplay, tap, MonoTypeOperatorFunction } from 'rxjs';
+import { BehaviorSubject, filter, Observable, shareReplay, tap, MonoTypeOperatorFunction, ignoreElements } from 'rxjs';
 
 
-export function initStore<T>(fn: Function): MonoTypeOperatorFunction<T> {
+export function initState<T>(fn: Function): MonoTypeOperatorFunction<T> {
   return (source: Observable<T>) => source.pipe(
-    tap(eventos => {
-      if (eventos === undefined) {
-        fn().subscribe();
+    tap(stateData => {
+      if (stateData === undefined) {
+        fn().pipe(ignoreElements()).subscribe();
       }
     }),
     shareReplay(1),
-    filter(Boolean),
+    filter(stateData => stateData !== undefined),
     tap(x => console.log('obtenido del store: ', x))
   );
 }
 
 export abstract class StoreService<T> {
-  protected _store: BehaviorSubject<T>;
-  protected store$: Observable<T>;
+  protected _state: BehaviorSubject<T>;
+  protected state$: Observable<T>;
 
   constructor(initialState?: T) {
-    this._store = new BehaviorSubject(initialState);
+    this._state = new BehaviorSubject(initialState);
     if (initialState !== undefined) {
-      this.store$ = this._store.asObservable();
+      this.state$ = this._state.asObservable();
     }
   }
 
-  protected get store(): T {
-    return this._store.getValue();
+  protected get state(): T {
+    return this._state.getValue();
   }
 
-  protected set store(state: T) {
-    this._store.next(state);
+  protected set state(state: T) {
+    this._state.next(state);
   }
 
 }

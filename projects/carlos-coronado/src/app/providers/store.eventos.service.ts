@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { ignoreElements, Observable, tap } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { HttpService } from './http.service';
-import { initStore, StoreService } from './store.service';
+import { initState, StoreService } from './store.service';
 
 
 @Injectable({
@@ -15,19 +15,18 @@ export class StoreEventosService extends StoreService<any> {
     super();
   }
 
-  getStore(searchDesc?: string): Observable<any> {
-    if (!this.store$) {
-      this.store$ = this._store.pipe(
-        initStore(() => this.loadEventos())
+  getState(searchDesc?: string): Observable<any> {
+    if (!this.state$) {
+      this.state$ = this._state.pipe(
+        initState(() => this.loadEventos())
       );
     }
-    return this.store$;
+    return this.state$;
   }
 
   loadEventos(searchDesc?: string) {
     return this.httpSrv.getListadoEventos(searchDesc).pipe(
-      tap((data: any) => this.store = this.formatEventos(data)),
-      ignoreElements()
+      tap((data: any) => this.state = this.formatEventos(data))
     );
   }
 

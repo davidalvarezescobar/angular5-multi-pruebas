@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { StoreService } from './store.service';
-import { PizzaState, Pizza, Topping } from './app.model';
+import { tap } from 'rxjs';
+import { Pizza, PizzaState, Topping } from './app.model';
 import { PizzaApiService } from './pizza-api.service';
+import { initState, StoreService } from './store.service';
 
 
 const pizzaState: PizzaState = {
@@ -11,11 +12,26 @@ const pizzaState: PizzaState = {
 };
 
 
-@Injectable()
+@Injectable({providedIn:'root'})
 export class PizzaStoreService extends StoreService<PizzaState> {
 
-  constructor(pizzaApi: PizzaApiService) {
-    super(pizzaState, pizzaApi, 'pizza-store');
+  constructor(
+    readonly pizzaApi: PizzaApiService
+  ) {
+    super(pizzaState);
+    // super(pizzaState, 'pizza-store'); // opción con almacenado de datos en SessionStorage
+  }
+
+  select(name: string) {
+    return this.selectState(name).pipe(
+      initState(() => this.load(name))
+    );
+  }
+
+  load(name: string) {
+    return this.pizzaApi[name].pipe(
+      tap((data: any) => this.setState(name, data))
+    );
   }
 
   // private addTopping(topping) {
@@ -28,20 +44,22 @@ export class PizzaStoreService extends StoreService<PizzaState> {
   //   this.setState('selectedToppings', selectedToppings.filter(t => t !== topping));
   // }
 
-  updateToppings(topping) {
-    const selectedToppings = this.getState('selectedToppings');
+  updateToppings(topping: Topping) {
+    const selectedToppings = this.getState('selectedToppings') as Topping[];
     const index = selectedToppings.indexOf(topping);
+    let toppings;
     if (!!~index) { // si es true, o sea si existe, lo BORRAMOS
-      this.setState('selectedToppings', selectedToppings.filter(t => t !== topping));
-
+      toppings = selectedToppings.filter(t => t !== topping) as Partial<Pizza>;
     } else { // si es false, lo AÑADIMOS
-      this.setState('selectedToppings', [...selectedToppings, topping]);
+      toppings = [...selectedToppings, topping] as Partial<Pizza>;
     }
+    this.setState('selectedToppings', toppings);
   }
 
-  add(stateName: string, value) {
-    const actualState = this.getState(stateName);
-    this.setState(stateName, [...actualState, value]);
+  addPizza(newPizza: Pizza) {
+    const currPizzas = this.getState('pizzas') as Pizza[];
+    const pizzas = [...currPizzas, newPizza] as Partial<Pizza>;
+    this.setState('pizzas', pizzas);
   }
 
   reset(stateName) {

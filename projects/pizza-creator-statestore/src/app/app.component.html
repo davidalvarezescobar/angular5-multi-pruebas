@@ -1,16 +1,10 @@
-<div [class.hide]="isLoading">
+<section>
   <h1>Pizza Creator</h1>
   <div class="content">
-    <app-pizza-form 
-      [toppings]="toppings$ | async"
-      [selectedToppings]="selectedToppings$ | async"
-      (selectToppings)="onSelectTopping($event)"
-      (newPizza)="onNewPizza($event)">
+    <app-pizza-form spinnerName="toppings" spinnerAppend="child" [toppings]="toppings$ | async" [selectedToppings]="selectedToppings$ | async"
+      (selectToppings)="onSelectTopping($event)" (newPizza)="onNewPizza($event)">
     </app-pizza-form>
-  
-    <app-pizza-list [pizzas]="pizzas$ | async"></app-pizza-list>
+
+    <app-pizza-list spinnerName="pizzas" spinnerAppend="child" [pizzas]="pizzas$ | async"></app-pizza-list>
   </div>
-</div>
-
-
-<div [class.hide]="!isLoading" style="width:110px;margin:0 auto"><b>LOADING . . .</b></div>
+</section>
