@@ -18,8 +18,10 @@ import { Component, OnInit, ElementRef, HostBinding } from '@angular/core';
 export class TooltipComponent implements OnInit {
   @HostBinding('style.top') top: string;
   @HostBinding('style.left') left: string;
+
   content: string;
   parentPosition; // : DOMRect;
+  
 
   constructor(
     private host: ElementRef

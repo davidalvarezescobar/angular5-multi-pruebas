@@ -1,8 +1,8 @@
-import { Component, OnInit, ViewChild, forwardRef } from '@angular/core';
+import { Component, OnInit, ViewChild, forwardRef, Provider } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 
-export const EPANDED_TEXTAREA_VALUE_ACCESSOR: any = {
+export const EPANDED_TEXTAREA_VALUE_ACCESSOR: Provider = {
   provide: NG_VALUE_ACCESSOR,
   useExisting: forwardRef(() => TextareaExpandedComponent),
   multi: true,
@@ -18,7 +18,7 @@ export const EPANDED_TEXTAREA_VALUE_ACCESSOR: any = {
       #textarea
       tabindex="1"
       role="textarea"
-      (input)="mi_onChange_fn($event)">
+      (input)="onInput($event)">
     </div>
   `,
   styles: [`
@@ -28,9 +28,9 @@ export const EPANDED_TEXTAREA_VALUE_ACCESSOR: any = {
   `]
 })
 export class TextareaExpandedComponent implements OnInit, ControlValueAccessor {
-  @ViewChild('textarea') textarea;
-  private _registerOnChange;
-  private _registerOnTouched;
+  @ViewChild('textarea', { static: true }) textarea;
+  private _onChange: (value) => {};
+  private _registerOnTouched: any;
 
   constructor() { }
 
@@ -44,20 +44,20 @@ export class TextareaExpandedComponent implements OnInit, ControlValueAccessor {
   }
 
   registerOnChange(fn: any): void {
-    this._registerOnChange = fn;
+    this._onChange = fn;
   }
 
   registerOnTouched(fn: any): void {
     this._registerOnTouched = fn;
   }
 
-  mi_onChange_fn($event) {
+  onInput($event) {
     // 3 Formas diferentes de obtener la información
     console.log($event.target.textContent);
     console.log($event.target.innerText);
     console.log($event.target.innerHTML);
     // propagamos hacia el modelo la información
-    this._registerOnChange($event.target.textContent);
+    this._onChange($event.target.textContent);
   }
 
 

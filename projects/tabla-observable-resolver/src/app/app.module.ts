@@ -7,6 +7,8 @@ import { UserListComponent } from './components/user-list/user-list.component';
 import { HnResolver } from './app.resolver';
 import { AppService } from './app.service';
 import { HttpClientModule } from '@angular/common/http';
+import { EjercicioGroupByComponent } from './components/ejercicio-group-by/ejercicio-group-by.component';
+import { GroupPipe } from './components/ejercicio-group-by/group.pipe';
 
 const routes: Routes = [
   { path: 'tabla', component: TableComponent, resolve: { users: HnResolver } },
@@ -18,7 +20,9 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     TableComponent,
-    UserListComponent
+    UserListComponent,
+    EjercicioGroupByComponent,
+    GroupPipe
   ],
   imports: [
     BrowserModule,

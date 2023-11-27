@@ -54,6 +54,5 @@ export class FileUploadComponent implements OnInit, ControlValueAccessor {
     this._registerOnTouched = fn;
   }
   setDisabledState?(isDisabled: boolean): void {
-    throw new Error('Method not implemented.');
   }
 }

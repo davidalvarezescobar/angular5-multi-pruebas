@@ -25,8 +25,8 @@ export class SelectComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() options;
   @Input() selectedOption: string;
 
-  @ViewChild('div') _select;
-  @ViewChild('ul') _options;
+  @ViewChild('div', { static: true }) _select;
+  @ViewChild('ul', { static: true }) _options;
 
   open = false;
   selected;

@@ -1,6 +1,6 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
   <label>To do:</label>
-  <input type="text" formControlName="tarea">
+  <input type="text" placeholder="Introduce Todo" formControlName="tarea">
   <small *ngIf="form.get('tarea').hasError('required') && form['submitted']">
     Campo obligatorio
   </small>

@@ -1,3 +1,16 @@
+# MultiProject
+
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.3.
+
+# STEPS:
+1) ng new my-workspace --create-application false
+2) cd my-workspace
+3) ng generate application my-first-app
+
+Modifica `defaultProject` del `angular.json` para arrancar el proyecto que necesites.
+
+
+
 # Angular5MultiPruebas
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.2.

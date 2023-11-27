@@ -40,11 +40,11 @@ export class TodoService {
   completeTodo(id) {
     // en un array de objetos, cambiamos la propiedad de un objeto
 
-    // con map:
-    // todos = todos.map(t => t.id === id ? {...t, completed: true} : t);
+    // con map (inmutable):
+    this.todos = this.todos.map(t => t.id === id ? {...t, completed: true} : t);
 
-    // con find():
-    this.todos.find(obj => obj.id === id).completed = true;
+    // con find (mutable):
+    // this.todos.find(obj => obj.id === id).completed = true;
   }
 
 }

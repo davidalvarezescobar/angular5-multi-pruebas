@@ -12,6 +12,7 @@ export interface IUser {
 }
 
 
+// CLASE QUE HE DEPRECADO, TODA LA FUNCIONALIDAD DE ESTA CLASE SE ENCUENTA AHORA EN LA CARPETA 'STORE'
 @Injectable()
 export class AppService {
   private _users$ = new BehaviorSubject(undefined);

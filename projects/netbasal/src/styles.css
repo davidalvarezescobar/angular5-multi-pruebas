@@ -24,25 +24,33 @@ abbr {
   text-decoration: unset;
 }
 abbr:hover::after {
-  position: absolute;
-  bottom: 100%;
-  left: 0;
-  display: block;
-  width: 100%;
-  padding: 4px;
-  background: yellow;
   content: attr(title);
+  position: absolute;
+  background-color: #000;
+  color: #fff;
+  padding: 4px;
+  border-radius: 4px;
+  left: 50%;
+  bottom: 100%;
+  /* top: 100%; */
+  transform: translateX(-50%);
+  white-space: nowrap;
 }
-/* abbr[aria-label] {
+abbr[aria-label] {
   position: relative;
 }
 abbr[aria-label]:hover::after,
 abbr[aria-label]:focus::after {
   content: attr(aria-label);
-
   position: absolute;
-  left: 0;
-  top: 105%;
+  /* sale hacia la derecha: */
+  left: 100%;
+  /* sale hacia la izquierda: */
+  /* left: 0; */
+  /* sale arriba: */
+  bottom: 100%;
+  /* sale abajo: */
+  /* top: 100%; */
   width: auto;
   white-space: nowrap;
 
@@ -52,7 +60,7 @@ abbr[aria-label]:focus::after {
   box-shadow: 1px 1px 5px 0 rgba(0,0,0,0.4);
   font-size: 14px;
   padding: 3px 5px;
-} */
+}
 
 
 app-select {

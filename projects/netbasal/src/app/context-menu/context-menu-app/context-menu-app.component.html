@@ -1,0 +1,9 @@
+<!-- el siguiente 'false', evita que aparezca el menú de windows -->
+<div (contextmenu)="display($event); false">
+    <span>Right click on me!</span>
+    <app-context-menu *ngIf="isDisplayed"
+        [ngStyle]="getMenuStyle()"
+        [menuItems]="menuItems"
+        (contextMenuClick)="handleMenuEvent($event)">
+    </app-context-menu>
+</div>

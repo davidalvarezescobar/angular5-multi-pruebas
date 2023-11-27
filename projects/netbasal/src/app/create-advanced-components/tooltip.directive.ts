@@ -1,4 +1,4 @@
-import { Directive, Input, HostListener, ComponentRef, ComponentFactoryResolver, ViewContainerRef } from '@angular/core';
+import { ComponentRef, Directive, HostListener, Input, ViewContainerRef } from '@angular/core';
 import { TooltipComponent } from './tooltip.component';
 
 @Directive({
@@ -9,15 +9,15 @@ export class TooltipDirective {
   private componentRef: ComponentRef<TooltipComponent>;
 
   constructor(
-    private container: ViewContainerRef,
-    private resolver: ComponentFactoryResolver
+    private container: ViewContainerRef
     ) { }
 
   @HostListener('mouseenter') mouseenter() {
-    if (this.componentRef) {return; }
+    if (this.componentRef) {
+      return;
+    }
 
-    const factory = this.resolver.resolveComponentFactory(TooltipComponent);
-    this.componentRef = this.container.createComponent(factory);
+    this.componentRef = this.container.createComponent(TooltipComponent);
 
     this.componentRef.instance.content = this.tooltipContent;
     this.componentRef.instance.parentPosition = this.container.element.nativeElement.getBoundingClientRect();

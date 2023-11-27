@@ -1,0 +1,6 @@
+<div *ngFor="let item of menuItems; let i=index"
+    (click)="onContextMenuClick($event, item.handler)">
+    {{item.text}}
+    <!-- OJO: muy bueno como se evita poner el último separador del bucle con el hr:  -->
+    <hr *ngIf="i < menuItems.length - 1">
+</div>

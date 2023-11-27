@@ -2,48 +2,52 @@
     <!-- https://netbasal.com/the-power-of-selectors-in-angular-cd6947ce3bfd -->
     <p></p>
     <app-custom-checkbox-component [control]="customCheck"></app-custom-checkbox-component>
-    <hr>
 </section>
-
+<hr>
 <section>
+    <small>> Hacemos que un div se comporte como un textArea y que pueda usarse por Reactive Forms</small>
     <!-- https://netbasal.com/angular-custom-form-controls-made-easy-4f963341c8e2 -->
     <p></p>
     <app-textarea-expanded [formControl]="textoEditable"></app-textarea-expanded>
     <button (click)="textoEditable.disable()">Disable</button>
     <button (click)="textoEditable.enable()">Enable</button>
     {{textoEditable.value}}
-    <hr>
 </section>
-
+<hr>
 <section>
+    <small>> 3 posibilidades para mostrar un tooltip</small>
     <!-- https://netbasal.com/create-advanced-components-in-angular-e0655df5dde6 -->
     <p></p>
-    <span tooltip="texto con tooltip" style="border: 1px solid aliceblue">Texto con tooltip</span>
-    <abbr title="Texto con tooltip nativo"><span>Texto con tooltip nativo</span></abbr>
-    <hr>
+    <span tooltip="Texto con tooltip mediante directiva" style="border: 1px solid aliceblue">Texto con tooltip</span>&nbsp;
+    <abbr title="Texto con tooltip nativo mediante atributo 'title'"><span>Texto con tooltip nativo</span></abbr>&nbsp;
+    <abbr aria-label="Texto con tooltip nativo mediante atributo 'aria-label'"><span>Texto con tooltip nativo</span></abbr>
 </section>
-
+<hr>
 <section>
+    <small>> Combinamos 2 filtros mediante RxJS</small>
     <!-- https://netbasal.com/manage-your-filters-like-a-pro-in-angular-with-combinelatest-e7b0204be2df -->
     <manage-your-filters-like-a-pro></manage-your-filters-like-a-pro>
-    <hr>
 </section>
-
+<hr>
 <section>
     <!-- https://netbasal.com/create-powerful-action-menu-with-angular-and-popper-eb047f789f2c -->
     <p></p>
     <app-select [options]="options" [selectedOption]="selected"></app-select>
     <p>este texto quedaré oculto al abrir el options</p>
-    <hr>
 </section>
-
+<hr>
 <section>
     <!-- https://netbasal.com/how-to-implement-file-uploading-in-angular-reactive-forms-89a3fffa1a03 -->
     <app-file-uploading></app-file-uploading>
-    <hr>
 </section>
-
+<hr>
 <section>
     <!-- uso de ngTemplateOutlet -->
     <app-template-outlet></app-template-outlet>
+</section>
+<hr>
+<section>
+    <small>> Componente context-menu on right click</small>
+    <!-- https://medium.com/weekly-webtips/create-custom-context-menu-in-angular-efeae0137e1a -->
+    <app-context-menu-app></app-context-menu-app>
 </section>

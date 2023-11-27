@@ -9,3 +9,6 @@ label {
 input {
     width: 200px;
 }
+.ng-submitted .ng-invalid {
+    border: red 2px solid;
+}

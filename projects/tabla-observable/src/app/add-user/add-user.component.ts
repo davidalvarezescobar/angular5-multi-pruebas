@@ -25,8 +25,10 @@ export class AddUserComponent implements OnInit {
 
   onSubmit() {
     console.log(this.form.value);
-    this.aceptar.emit(this.form.value);
-    this.form.setValue({name:'', registration:'', email:'', isPremium:false})
+    if (this.form.valid) {
+      this.aceptar.emit(this.form.value);
+      this.form.setValue({name:'', registration:'', email:'', isPremium:false})
+    }
   }
 
 }
