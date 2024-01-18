@@ -30,13 +30,16 @@
 </section>
 <hr>
 <section>
+    <small>> Custom Select</small>
     <!-- https://netbasal.com/create-powerful-action-menu-with-angular-and-popper-eb047f789f2c -->
     <p></p>
     <app-select [options]="options" [selectedOption]="selected"></app-select>
-    <p>este texto quedaré oculto al abrir el options</p>
+    <p>este texto quedaré oculto al abrir los options</p>
+    <app-mi-select [options]="options" [selectedOption]="miSelected"></app-mi-select>
 </section>
 <hr>
 <section>
+    <small>> Upload de fichero mediante un custom componente, que además realiza un progress del update</small>
     <!-- https://netbasal.com/how-to-implement-file-uploading-in-angular-reactive-forms-89a3fffa1a03 -->
     <app-file-uploading></app-file-uploading>
 </section>

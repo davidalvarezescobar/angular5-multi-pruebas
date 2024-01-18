@@ -20,15 +20,21 @@ export class FileUploadingComponent implements OnInit {
   ngOnInit() {
     this.signup = this.fb.group({
       email: [null, Validators.required],
-      image: [null, Validators.required]
+      file: [null, Validators.required]
     });
   }
 
   submit() {
+    if (!this.signup.valid) {
+      console.log(this.signup.status);
+      return;
+    }
     console.log('form:', this.signup.value);
 
     const fd = this.toFormData(this.signup.value);
-    this.http.post('https://reqres.in/api/user', fd, {reportProgress: true, observe: 'events'})
+    // en un navegador sin seguridad funcionará la llamada http,
+    // si tiene seguridad fallará, pero veremos el progreso en la consola:
+    this.http.post('https://reqres.in/api/kk', fd, {reportProgress: true, observe: 'events'})
       .subscribe(res => {
         if (res.type === HttpEventType.UploadProgress) {
           this.progress = Math.round((100 * res.loaded) / res.total);

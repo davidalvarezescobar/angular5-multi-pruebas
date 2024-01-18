@@ -2,8 +2,8 @@
   Usamos ng-container + templates, en lugar de content proyection:
 </p>
 
-<ul *ngFor="let datarow of dataList">
-  <ng-container
+<ul>
+  <ng-container *ngFor="let datarow of dataList"
     [ngTemplateOutlet]="rowRef"
     [ngTemplateOutletContext]="{templateData: datarow}">
   </ng-container>

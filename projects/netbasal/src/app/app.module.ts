@@ -20,6 +20,7 @@ import { TemplateOutletComponent } from './template-outlet/template-outlet.compo
 import { NweInputComponent } from './template-outlet/nwe-input/nwe-input.component';
 import { ContextMenuAppComponent } from './context-menu/context-menu-app/context-menu-app.component';
 import { ContextMenuComponent } from './context-menu/context-menu/context-menu.component';
+import { MiSelectComponent } from './mi-select/mi-select.component';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { ContextMenuComponent } from './context-menu/context-menu/context-menu.c
     TemplateOutletComponent,
     NweInputComponent,
     ContextMenuAppComponent,
-    ContextMenuComponent
+    ContextMenuComponent,
+    MiSelectComponent
   ],
   imports: [
     BrowserModule,

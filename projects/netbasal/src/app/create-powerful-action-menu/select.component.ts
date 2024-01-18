@@ -9,8 +9,7 @@ import { distinctUntilChanged, filter, fromEvent, pluck, takeWhile, tap } from '
       <span>{{selected.label}}</span>
     </div>
     <ul class="options" [ngStyle]="optionsStyles" #ul>
-      <li
-        *ngFor="let option of options"
+      <li *ngFor="let option of options"
         (click)="this.selected=option">{{option.label}}
       </li>
     </ul>
@@ -75,27 +74,25 @@ export class SelectComponent implements OnInit, AfterViewInit, OnDestroy {
   //   }
   // }
   listen_DocumentClick() {
-    fromEvent(document, 'click')
-      .pipe(
-        takeWhile(() => this.takeWhile),
-        pluck('target'),
-        tap(() => console.log('SelectComponent:document-click'))
-      )
-      .subscribe(target => {
-        if (this._select.nativeElement.contains(target)) {
-          this.open = !this.open;
-        } else {
-          this.open = false;
-        }
+    fromEvent(document, 'click').pipe(
+      takeWhile(() => this.takeWhile),
+      pluck('target'),
+      tap(() => console.log('SelectComponent:document-click'))
+    ).subscribe(target => {
+      if (this._select.nativeElement.contains(target)) {
+        this.open = !this.open;
+      } else {
+        this.open = false;
+      }
 
-        if (this.open) {
-          this.calcularPosition();
-          this.calcularAncho();
-          this.optionsStyles.display = 'block';
-        } else {
-          this.optionsStyles.display = 'none';
-        }
-      });
+      if (this.open) {
+        this.calcularPosition();
+        this.calcularAncho();
+        this.optionsStyles.display = 'block';
+      } else {
+        this.optionsStyles.display = 'none';
+      }
+    });
   }
 
 
@@ -103,17 +100,15 @@ export class SelectComponent implements OnInit, AfterViewInit, OnDestroy {
   //   this.calcularAncho();
   // }
   listen_WindowResize() {
-    fromEvent(window, 'resize')
-      .pipe(
-        takeWhile(() => this.takeWhile),
-        filter(() => this.open),
-        pluck('target', 'innerWidth'),
-        distinctUntilChanged(),
-        tap(() => console.log('SelectComponent:window-resize'))
-      )
-      .subscribe(() => {
-        this.calcularAncho();
-      });
+    fromEvent(window, 'resize').pipe(
+      takeWhile(() => this.takeWhile),
+      filter(() => this.open),
+      pluck('target', 'innerWidth'),
+      distinctUntilChanged(),
+      tap(() => console.log('SelectComponent:window-resize'))
+    ).subscribe(() => {
+      this.calcularAncho();
+    });
   }
 
 

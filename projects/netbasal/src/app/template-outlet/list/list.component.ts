@@ -1,10 +1,5 @@
 import {
-  Component,
-  OnInit,
-  Input,
-  ContentChild,
-  TemplateRef,
-  AfterContentInit,
+  AfterContentInit, Component, ContentChild, Input, TemplateRef
 } from "@angular/core";
 
 @Component({
@@ -12,15 +7,11 @@ import {
   templateUrl: "./list.component.html",
   styleUrls: ["./list.component.css"],
 })
-export class ListComponent implements OnInit, AfterContentInit {
+export class ListComponent implements AfterContentInit {
   @Input() public dataList: any; // los datos que maneja el componente
   @ContentChild("rows") rowRef: TemplateRef<any>;
 
-  constructor() {}
-
-  ngOnInit() {}
-
   ngAfterContentInit() {
-    console.log(this.rowRef);
+    console.log('list.component:', this.rowRef);
   }
 }

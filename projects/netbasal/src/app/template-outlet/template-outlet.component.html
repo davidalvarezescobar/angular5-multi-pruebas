@@ -1,9 +1,13 @@
-<app-list [dataList]="arr" *ngIf="btn['status']">
+<small>> Cómo pasar datos desde un componente padre a otros componentes hijo, mediante el uso de template</small>
+<br>
+
+<app-list [dataList]="arr" *ngIf="btn['isOpen']">
   <ng-template #rows let-movimiento="templateData">
     <app-row [rowData]="movimiento" (select)="onSelect($event)"></app-row>
   </ng-template>
 </app-list>
-<button #btn (click)="btn['status'] = !btn['status']">hide/show</button>
+
+<button #btn (click)="btn['isOpen'] = !btn['isOpen']">hide/show</button>
 
 <p>-----------------------------------------------------------------------</p>
 

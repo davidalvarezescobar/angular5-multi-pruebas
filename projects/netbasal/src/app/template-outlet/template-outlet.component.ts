@@ -8,7 +8,7 @@ import { combineLatest, map, startWith } from 'rxjs';
   styleUrls: ['./template-outlet.component.css']
 })
 export class TemplateOutletComponent implements OnInit {
-  arr = ['uno', 'dos'];
+  arr = ['dato uno', 'dato dos'];
 
   form: FormGroup;
 

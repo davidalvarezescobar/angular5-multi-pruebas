@@ -1,17 +1,17 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-row',
   templateUrl: './row.component.html',
-  styleUrls: ['./row.component.css']
+  styles: [`
+    :host {
+      display: block;
+      background: aliceblue;
+    }
+  `]
 })
-export class RowComponent implements OnInit {
+export class RowComponent {
   @Input() rowData;
   @Output() select = new EventEmitter();
-
-  constructor() { }
-
-  ngOnInit() {
-  }
 
 }

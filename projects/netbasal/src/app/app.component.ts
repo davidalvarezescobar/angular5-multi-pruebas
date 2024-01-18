@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
     {label: 'adios', value: 3}
   ];
   selected = 'adios';
-
+  miSelected = {label: 'adios', value: 3};
 
   constructor() {
   }
