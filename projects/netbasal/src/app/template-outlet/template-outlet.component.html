@@ -1,4 +1,4 @@
-<small>> Cómo pasar datos desde un componente padre a otros componentes hijo, mediante el uso de template</small>
+<small>> Cómo pasar datos desde un componente padre a otros componentes hijo, que están dentro de 'ng-template'</small>
 <br>
 
 <app-list [dataList]="arr" *ngIf="btn['isOpen']">
@@ -11,17 +11,25 @@
 
 <p>-----------------------------------------------------------------------</p>
 
+<small>> Ejemplo de custom component con un input-text que utiliza 'content projection'</small>
+<br>
+
 <form [formGroup]="form">
   <div>
-    <input type="text" placeholder="Introduce texto" formControlName="input1">
+    <input type="text" placeholder="Introduce texto" formControlName="input1" aria-label="kk">
   </div>
 
   <nwe-input img="search">
-    <input type="text" placeholder="Introduce texto" formControlName="input2">
+    <input type="text" placeholder="Introduce texto" formControlName="input2" aria-label="kk">
   </nwe-input>
 </form>
 
+formValue: {{form.value | json}}
+
 <p>-----------------------------------------------------------------------</p>
+
+<small>> Filtro: sobre el usuario seleccionado, podemos aplicar un filtro doble, establecido mediante otro select y un checkbox:</small>
+<br>
 
 <select [formControl]="selectedUserId">
   <option value="" hidden>Select a User</option>
@@ -31,5 +39,6 @@
   <option *ngFor="let user of users" [value]="user.id">{{ user.name }}</option>
 </select>
 Allow black listed users
-<input type="checkbox" [formControl]="allowBlackListedUsers" />
+<input type="checkbox" [formControl]="allowBlackListedUsers" aria-label="kk"/>
+
 <button [disabled]="isDisabled$ | async">Submit</button>

@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { ContextMenu } from '../context-menu/context-menu.component';
+import { Component, ElementRef, ViewChild } from '@angular/core';
+import { ContextMenu, ContextMenuComponent } from '../context-menu/context-menu.component';
 
 @Component({
   selector: 'app-context-menu-app',
@@ -7,10 +7,14 @@ import { ContextMenu } from '../context-menu/context-menu.component';
   styleUrls: ['./context-menu-app.component.css']
 })
 export class ContextMenuAppComponent {
+  @ViewChild(ContextMenuComponent, { read: ElementRef }) todoTitleInput: ElementRef;
   isDisplayed: boolean;
   menuItems: Array<ContextMenu> = [];
   menuPositionX: number;
   menuPositionY: number;
+  menuStyle: {
+    [klass: string]: any;
+  };
 
   display(event: MouseEvent) {
     this.isDisplayed = true;
@@ -20,13 +24,27 @@ export class ContextMenuAppComponent {
     ];
     this.menuPositionX = event.clientX;
     this.menuPositionY = event.clientY;
+
+    setTimeout(() => this.getMenuStyle());
   }
 
   getMenuStyle() {
-    return {
+    const windowHeight = window.innerHeight;
+    const distanciaParteInferior = windowHeight - this.menuPositionY;
+    const alturaMenu = this.todoTitleInput.nativeElement.offsetHeight;
+
+    const left = this.menuPositionX;
+    let top = this.menuPositionY;
+
+    if (distanciaParteInferior < alturaMenu) {
+      // Si está cerca de la parte inferior, muéstralo por encima
+      top = this.menuPositionY - alturaMenu - 5;
+    }
+
+    this.menuStyle = {
       position: 'fixed',
-      left: `${this.menuPositionX}px`,
-      top: `${this.menuPositionY}px`
+      left: `${left}px`,
+      top: `${top}px`
     };
   }
 

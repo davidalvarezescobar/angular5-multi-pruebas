@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-ejercicio-group-by',
   templateUrl: './ejercicio-group-by.component.html',
-  styleUrls: ['./ejercicio-group-by.component.css']
+  styleUrls: []
 })
 export class EjercicioGroupByComponent {
   // el ejercicio está aquí:

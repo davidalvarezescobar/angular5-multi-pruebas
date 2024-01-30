@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { combineLatest, map, startWith } from 'rxjs';
 
 @Component({
@@ -7,11 +7,16 @@ import { combineLatest, map, startWith } from 'rxjs';
   templateUrl: './template-outlet.component.html',
   styleUrls: ['./template-outlet.component.css']
 })
-export class TemplateOutletComponent implements OnInit {
-  arr = ['dato uno', 'dato dos'];
+export class TemplateOutletComponent {
+  arr = ['dato uno', 'dato dos']; // ejercicio1
 
-  form: FormGroup;
+  form: FormGroup = this.fb.group({
+    input1: 'hola',
+    input2: 'adios'
+  }); // ejercicio2
 
+
+  // ejercicio3:
   users = [
     { name: 'John', id: 1 },
     { name: 'Andrew', id: 2 },
@@ -21,6 +26,7 @@ export class TemplateOutletComponent implements OnInit {
   selectedUserId = new FormControl('');
   blackListedUsers = new FormControl([]);
   allowBlackListedUsers = new FormControl(false);
+
   isDisabled$ = combineLatest([
     this.allowBlackListedUsers.valueChanges.pipe(startWith(false)),
     this.blackListedUsers.valueChanges.pipe(startWith([])),
@@ -31,16 +37,10 @@ export class TemplateOutletComponent implements OnInit {
     })
   )
 
+
   constructor(
     private fb: FormBuilder
   ) { }
-
-  ngOnInit() {
-    this.form = this.fb.group({
-      input1: 'hola',
-      input2: 'adios'
-    });
-  }
 
   onSelect(e) {
     alert(e);

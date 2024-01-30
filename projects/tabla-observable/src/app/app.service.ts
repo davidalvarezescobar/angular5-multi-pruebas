@@ -11,7 +11,7 @@ export interface IUser {
   isPremium: boolean;
 }
 
-
+// OJO!!!!
 // CLASE QUE HE DEPRECADO, TODA LA FUNCIONALIDAD DE ESTA CLASE SE ENCUENTA AHORA EN LA CARPETA 'STORE'
 @Injectable()
 export class AppService {

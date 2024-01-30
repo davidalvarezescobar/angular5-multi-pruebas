@@ -1,8 +1,6 @@
-<p>-------------------------------------</p>
-
 <h3>Simple Grouping based on single key</h3>
 
-<div class="group" *ngFor="let innerArr of numbers | group: 'type' | async">
+<div *ngFor="let innerArr of numbers | group: 'type' | async">
     <b>Key:{{ innerArr[0].type }}</b>
 
     <div *ngFor="let num of innerArr">

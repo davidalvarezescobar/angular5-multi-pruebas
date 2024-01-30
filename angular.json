@@ -577,6 +577,7 @@
               "projects/netbasal/src/assets"
             ],
             "styles": [
+              "./node_modules/font-awesome/css/font-awesome.min.css",
               "projects/netbasal/src/styles.css"
             ],
             "scripts": []

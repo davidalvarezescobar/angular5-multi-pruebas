@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { PizzaService } from '../pizza.service';
+import { Observable } from 'rxjs';
+import { Pizza, PizzaService, StateProps, Topping } from '../pizza.service';
 
 @Component({
   selector: 'app-pizza-creator',
@@ -8,19 +9,19 @@ import { PizzaService } from '../pizza.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PizzaCreatorComponent implements OnInit {
-  pizzas$;
-  toppings$;
+  pizzas$: Observable<Pizza[]>;
+  toppings$: Observable<Topping[]>;
 
   constructor(
     private pizzaService: PizzaService
   ) { }
 
   ngOnInit() {
-    this.pizzas$ = this.pizzaService.select('pizzas');
-    this.toppings$ = this.pizzaService.select('toppings');
+    this.pizzas$ = this.pizzaService.select<Pizza[]>(StateProps.pizzas);
+    this.toppings$ = this.pizzaService.select<Topping[]>(StateProps.toppings);
   }
 
-  addPizza(pizza) {
+  addPizza(pizza: Pizza) {
     this.pizzaService.addPizza(pizza);
   }
 

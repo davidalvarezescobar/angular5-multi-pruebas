@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject, BehaviorSubject, timer } from 'rxjs';
+import { Subject, BehaviorSubject, timer, ReplaySubject } from 'rxjs';
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
@@ -15,21 +15,21 @@ export interface IUser {
 @Injectable()
 export class AppService {
   // private users: IUser[];
-  private _users$ = new Subject<IUser[]>();
+  private _users = new ReplaySubject<IUser[]>(1);
+  users$ = this._users.asObservable();
 
   constructor(
     private http: HttpClient
   ) {}
 
   getUsers(): Observable<IUser[]> {
-    this.simulateHttpGet<IUser[]>('../assets/mock/users.json').subscribe(users => {
-      this.refresh(users);
-    });
-    return this._users$.asObservable();
+    this.simulateHttpGet<IUser[]>('../assets/mock/users.json').subscribe(users => this.refresh(users));
+    
+    return this._users.asObservable();
   }
 
   refresh(data) {
-    this._users$.next(data);
+    this._users.next(data);
   }
 
   simulateHttpGet<T>(endPoint): Observable<T> {

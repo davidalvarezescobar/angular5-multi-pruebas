@@ -2,7 +2,7 @@
 <div (contextmenu)="display($event); false">
     <span>Right click on me!</span>
     <app-context-menu *ngIf="isDisplayed"
-        [ngStyle]="getMenuStyle()"
+        [ngStyle]="menuStyle"
         [menuItems]="menuItems"
         (contextMenuClick)="handleMenuEvent($event)">
     </app-context-menu>

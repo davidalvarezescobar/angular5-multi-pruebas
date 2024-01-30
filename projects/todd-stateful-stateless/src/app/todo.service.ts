@@ -11,10 +11,8 @@ export interface Todo {
 @Injectable()
 export class TodoService {
   private _todos$ = new BehaviorSubject<Todo[]>([]);
-
-  constructor() { }
-
   readonly todos$ = this._todos$.asObservable();
+  
 
   private get todos() {
     return this._todos$.value;

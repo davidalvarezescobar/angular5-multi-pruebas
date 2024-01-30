@@ -2,8 +2,10 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+  template: `
+    <app-todos></app-todos>
+  `,
+  styleUrls: [],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent {

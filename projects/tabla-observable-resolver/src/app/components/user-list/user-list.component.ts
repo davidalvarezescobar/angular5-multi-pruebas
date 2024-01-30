@@ -1,20 +1,15 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { IUser } from '../../app.service';
 
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
-  styleUrls: ['./user-list.component.css']
+  styleUrls: []
 })
-export class UserListComponent implements OnInit {
+export class UserListComponent {
   @Input() users: IUser[];
   @Output() onUpdateUser = new EventEmitter();
   @Output() onAddUser = new EventEmitter();
   @Output() onAproveAll = new EventEmitter();
-
-  constructor() { }
-
-  ngOnInit() {
-  }
 
 }
