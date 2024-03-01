@@ -2,13 +2,19 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, filter, ignoreElements, Observable, shareReplay, tap } from 'rxjs';
 
 
+/**
+ * Store Común
+ * 
+ * @template T 
+ */
 @Injectable({
   providedIn: 'root'
 })
 export abstract class StoreService<T> {
-  private _stateSubject = new BehaviorSubject(undefined);
+  private _stateSubject = new BehaviorSubject<T>(undefined);
   private _state$: Observable<T>;
   
+  // la implementación del siguiente método abstracto debe proporcionarse en la clase derivada (la clase que extiende de esta):
   abstract loadStoreData(): Observable<T> | T;
 
   public getState(): Observable<T> {

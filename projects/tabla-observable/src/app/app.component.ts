@@ -12,15 +12,15 @@ export class AppComponent implements OnInit {
   showModal = false;
 
   constructor(
-    private service: AppService,
+    private service: AppService, // servicio DEPRECADO
     readonly userStore: StoreUserService
   ) {}
 
   ngOnInit() {
     // this.users$ = this.service.getUsers(); // servicio DEPRECADO
     this.users$ = this.userStore.getState();
-    this.userStore.getState().subscribe();
-    this.userStore.getState().subscribe();
+    this.userStore.getState().subscribe(); // --> para comprobar que nuevas suscripciones no lanzan nuevas peticiones a back
+    this.userStore.getState().subscribe(); // --> para comprobar que nuevas suscripciones no lanzan nuevas peticiones a back
   }
 
   onUpdateUser(user) {

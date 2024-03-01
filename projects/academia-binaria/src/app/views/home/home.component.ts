@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'app-home',
@@ -6,16 +6,13 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   styleUrls: ['./home.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
   inputProps = [
     { pHolder: 'hola', icon: 'lock' },
     { pHolder: 'tron', icon: 'music' }
   ];
   value;
 
-  constructor() { }
-
-  ngOnInit() { }
 
   add() {
     this.inputProps.push(

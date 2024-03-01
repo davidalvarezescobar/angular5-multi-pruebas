@@ -1,20 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-about',
   template: `
     <p>
-    about works!
+    nothing useful!
     <a routerLink="/home">Go home</a>
     </p>
   `,
   styles: []
 })
-export class AboutComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
+export class AboutComponent {
 
 }

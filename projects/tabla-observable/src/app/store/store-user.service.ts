@@ -24,6 +24,9 @@ const data = [
   }
 ];
 
+/**
+ * Store Específico
+ */
 @Injectable({
   providedIn: 'root'
 })
@@ -39,7 +42,7 @@ export class StoreUserService extends StoreService<any> {
   // este método se encargará de realizar la llamada a back para obtener los datos del 'store';
   // podrá retornar un observable con los datos, o simplemente los datos (si ya los tenemos disponibles):
   loadStoreData(): Observable<IUser[]> | IUser[] {
-    // return data;
+    // return data; --> los datos, si ya los tenemos disponibles
     return this.apiSrv.fetchUsers().pipe(
       tap(_ => console.log('realizamos las modificaciones de datos oportunas mediante el operador "map()", no con este "tap()" que sólo sirve para este log...'))
     )

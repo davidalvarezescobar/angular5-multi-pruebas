@@ -7,9 +7,15 @@ import { Operation } from '../operations/operation';
 @Component({
   selector: 'app-detail-item',
   template: `
+    <p>detail-item.component:</p>
     <h3>{{ operation | json }}</h3>
   `,
-  styles: []
+  styles: [`
+  :host {
+    background-color: antiquewhite;
+    display: block;
+  }
+`]
 })
 export class DetailItemComponent implements OnInit {
   operation: Operation;

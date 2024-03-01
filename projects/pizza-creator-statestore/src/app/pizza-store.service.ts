@@ -18,7 +18,7 @@ export class PizzaStoreService extends StoreService<PizzaState> {
   constructor(
     readonly pizzaApi: PizzaApiService
   ) {
-    super(pizzaState);
+    super(pizzaState); // --> OJO: los 'selectedToppings' ya van inicializados on un array vacío! no se necesita llamada a back!!
     // super(pizzaState, 'pizza-store'); // opción con almacenado de datos en SessionStorage
   }
 

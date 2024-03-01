@@ -19,7 +19,7 @@ export class PizzaLoaderService {
     });
 
     // rellenamos los datos del formArray 'pizzas'
-    for (const pizza of demoPizzaData.pizzas) {
+    for (const pizza of demoPizzaData.pizzas) { // recuerda que el for...of itera sobre arrays y, for...in itera sobre propiedades de objetos
       const group = this.pizzaFormService.addPizza();
       group.patchValue({
         size: pizza.size,

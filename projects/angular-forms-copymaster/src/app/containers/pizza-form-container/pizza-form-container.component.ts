@@ -8,7 +8,7 @@ import { PizzaLoaderService } from './services/pizza-loader.service';
 @Component({
   selector: 'app-pizza-form-container',
   templateUrl: './pizza-form-container.component.html',
-  styleUrls: ['./pizza-form-container.component.scss'],
+  styleUrls: [],
   providers: [
     PizzaFormService,
     PizzaFormValidatorsService,
@@ -24,7 +24,7 @@ export class PizzaFormContainerComponent implements OnInit {
   get selectedPizza(): FormGroup | null {
     if (!this.pizzaFormService.pizzas.length) return null;
 
-    // obtenemos la pizza sobre la que estamos trabajando (recuerda que la pizaa es un FormGroup formado por 'size' y 'toppings'):
+    // obtenemos la pizza sobre la que estamos trabajando (recuerda que la pizza es un FormGroup formado por 'size' y 'toppings'):
     return this.pizzaFormService.pizzas.at(this.pizzaFormService.selectedPizza) as FormGroup;
   }
 

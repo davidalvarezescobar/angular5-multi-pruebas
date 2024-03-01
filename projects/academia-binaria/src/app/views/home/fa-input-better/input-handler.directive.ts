@@ -6,7 +6,6 @@ import { Directive, HostListener, EventEmitter } from '@angular/core';
 export class InputHandlerDirective {
   focus = new EventEmitter();
 
-  constructor() { }
 
   @HostListener('focus') onfocus() {
     this.focus.emit(true);

@@ -15,6 +15,8 @@
 
 <section>
   <p>Componente fa-input:</p>
+
+  <!-- <input> está dentro de <label> para que al hacer click en el 'label', el 'input' reciba el foco -->
   <label *ngFor="let prop of inputProps" style="display: block;">
     {{prop.pHolder}}
     <fa-input
@@ -23,6 +25,7 @@
       (value)="value=$event">
     </fa-input>
   </label>
+
   <button (click)="add()">ADD</button>
   <p>Value fa-input obtenido: {{value}}</p>
 </section>
@@ -32,9 +35,11 @@
 <section>
   <p>Componente fa-input mejorado con content projection:</p>
   <small>Impresionante mi directiva 'inputHandler' que propaga el evento 'onfocus' del input</small><br>
+
   <fa-input-better icon="envelope">
-    <input type="email" placeholder="email" inputHandler>
+    <input type="email" placeholder="email" inputHandler aria-label="kk">
   </fa-input-better>
+
 </section>
 
 <hr>
@@ -48,6 +53,7 @@
     <option value="" disabled selected hidden>Selecciona...</option>
     <option *ngFor="let prop of inputProps" [value]="prop.pHolder">{{prop.icon}}</option>
   </select>
+  
   <div>Value obtenido: {{combo.value}}</div>
   <div>Text obtenido: {{combo.options[combo.selectedIndex].text}}</div>
 </section>
