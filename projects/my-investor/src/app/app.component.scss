@@ -1,0 +1,22 @@
+.row {
+    display: flex;
+    gap: 28px;
+}
+
+ol {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+li {
+    padding-bottom: 8px;
+}
+
+.even-item {
+    background-color: lightblue;
+}
+
+.odd-item {
+    background-color: lightgreen;
+}

@@ -1,0 +1,15 @@
+<ng-container *ngIf="funds$ | async as funds">
+  <h2>{{funds.length}} encontrados</h2>
+  <ol>
+    <li *ngFor="let fund of funds; let isEven = even; let isOdd = odd" [ngClass]="{ 'even-item': isEven, 'odd-item': isOdd }">
+      <p>{{fund.nombre}} - <a href="https://www.morningstar.es/es/funds/snapshot/snapshot.aspx?id={{fund.secIdFondoMorningstar}}" target="_blank">{{fund.secIdFondoMorningstar}}</a></p>
+      <p class="row">
+        <span>Volatilidad: {{fund.volatilidad}}</span> &nbsp;
+        <span>Año actual: <b>{{fund.ytd}}</b></span>
+        <span>1 año: <b>{{fund.yearUno}}</b></span>
+        <span>3 año: <b>{{fund.yearTres}}</b></span>
+        <span>5 año: <b>{{fund.yearCinco}}</b></span>
+      </p>
+    </li>
+  </ol>
+</ng-container>
