@@ -10,7 +10,7 @@ export interface Todo {
 
 @Injectable()
 export class TodoService {
-  private _todos$ = new BehaviorSubject<Todo[]>([]);
+  private readonly _todos$ = new BehaviorSubject<Todo[]>([]);
   readonly todos$ = this._todos$.asObservable();
   
 

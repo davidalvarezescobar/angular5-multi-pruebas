@@ -49,22 +49,22 @@ export class StoreUserService extends StoreService<any> {
   }
 
   updatePremium(user: IUser) {
-    // this.state.find(obj => { // en varias líneas
+    // this.state.find(obj => {                                                 // en varias líneas
     //   return obj.name === user.name;
     // }).isPremium = !user.isPremium;
     this.state.find(obj => obj.name === user.name).isPremium = !user.isPremium; // en una sóla línea
   }
 
   addUser(user: IUser) {
-    // this.state = this.state.push(user) ); // mutable
-    this.state = [...this.state, user]; // inmutable
+    // this.state = this.state.push(user) );  // mutable
+    this.state = [...this.state, user];       // inmutable
   }
 
   aproveAll() {
-    // this._users$.value.map(user => { // en varias líneas
+    // this._users$.value.map(user => {             // en varias líneas
     //   return user.isPremium = true;
     // });
-    this.state.map(user => user.isPremium = true); // en una sóla línea
+    this.state.map(user => user.isPremium = true);  // en una sóla línea
   }
   
 }

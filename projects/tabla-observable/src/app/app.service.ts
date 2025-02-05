@@ -11,11 +11,11 @@ export interface IUser {
   isPremium: boolean;
 }
 
-// OJO!!!!
+/////////////////////////////////////////////////////////////////////////////////////////////// OJO!!!!
 // CLASE QUE HE DEPRECADO, TODA LA FUNCIONALIDAD DE ESTA CLASE SE ENCUENTA AHORA EN LA CARPETA 'STORE'
 @Injectable()
 export class AppService {
-  private _users$ = new BehaviorSubject(undefined);
+  private readonly _users$ = new BehaviorSubject(undefined);
   readonly users$ = this._users$.asObservable();
 
   private get users() {
@@ -28,7 +28,7 @@ export class AppService {
 
 
   constructor(
-    private http: HttpClient
+    readonly http: HttpClient
   ) { }
 
 

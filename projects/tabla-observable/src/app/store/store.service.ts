@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, filter, ignoreElements, Observable, shareReplay, tap } from 'rxjs';
+import { BehaviorSubject, filter, Observable, shareReplay, tap } from 'rxjs';
 
 
 /**
@@ -11,7 +11,7 @@ import { BehaviorSubject, filter, ignoreElements, Observable, shareReplay, tap }
   providedIn: 'root'
 })
 export abstract class StoreService<T> {
-  private _stateSubject = new BehaviorSubject<T>(undefined);
+  private readonly _stateSubject = new BehaviorSubject<T>(undefined);
   private _state$: Observable<T>;
   
   // la implementación del siguiente método abstracto debe proporcionarse en la clase derivada (la clase que extiende de esta):
@@ -24,8 +24,7 @@ export abstract class StoreService<T> {
           if (stateData === undefined) {
             const stateData = this.loadStoreData();
             if (stateData instanceof Observable) {
-              // comento este bloque, pq creo que es más sencillo el seteo de los datos en el suscribe,
-              // en lugar de hacerlo con un 'tap':
+              // comento este bloque, pq creo que es más sencillo el seteo de los datos en el subscribe, en lugar de hacerlo con un 'tap':
               // stateData.pipe(
               //   tap((stateData: T) => this.state = stateData),
               //   ignoreElements()

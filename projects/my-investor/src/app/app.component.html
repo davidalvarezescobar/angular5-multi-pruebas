@@ -1,15 +1,50 @@
 <ng-container *ngIf="funds$ | async as funds">
   <h2>{{funds.length}} encontrados</h2>
   <ol>
-    <li *ngFor="let fund of funds; let isEven = even; let isOdd = odd" [ngClass]="{ 'even-item': isEven, 'odd-item': isOdd }">
-      <p>{{fund.nombre}} - <a href="https://www.morningstar.es/es/funds/snapshot/snapshot.aspx?id={{fund.secIdFondoMorningstar}}" target="_blank">{{fund.secIdFondoMorningstar}}</a></p>
-      <p class="row">
-        <span>Volatilidad: {{fund.volatilidad}}</span> &nbsp;
-        <span>Año actual: <b>{{fund.ytd}}</b></span>
-        <span>1 año: <b>{{fund.yearUno}}</b></span>
-        <span>3 año: <b>{{fund.yearTres}}</b></span>
-        <span>5 año: <b>{{fund.yearCinco}}</b></span>
-      </p>
+    <li *ngFor="let fund of funds | orderBy:{reverse:true, column:'ytd'}; let isEven = even; let isOdd = odd"
+      [ngClass]="{ 'even-item': isEven, 'odd-item': isOdd }">
+      <details open="true">
+        <summary>
+          <span>{{fund.nombre}} - {{fund.codigoIsin}}</span>
+          <input class="check" type="checkbox" [value]="fund.codigoIsin" (change)="onCardSelect(fund.codigoIsin, $event)">
+        </summary>
+        <section>
+          <div>
+            <p>
+              <span [ngClass]="{
+                'green': fund.volatilidadYearTres < 2,
+                'orange': fund.volatilidadYearTres > 2 && fund.volatilidadYearTres < 4,
+                'red': fund.volatilidadYearTres > 4
+              }">Volatilidad 3a: <b>{{fund.volatilidadYearTres}}</b></span>
+              <!-- <span [ngClass]="{
+                'green': fund.volatilidad < 2,
+                'orange': fund.volatilidad > 2 && fund.volatilidad < 4,
+                'red': fund.volatilidad > 4
+              }">Volatilidad: <b>{{fund.volatilidad}}</b></span> -->
+            </p>
+            <p class="row">
+              <span>Año actual: <b>{{fund.ytd}}</b></span>
+              <span>Ratio: <b>{{fund.ratio}}</b></span>
+              <span>Anualizada 1: <b>{{fund.yearUno}}</b></span>
+              <span>Anualizada 3: <b>{{fund.yearTres}}</b></span>
+              <span>Anualizada 5: <b>{{fund.yearCinco}}</b></span>
+            </p>
+          </div>
+          <div class="figure">
+            <a
+              href="https://www.morningstar.es/es/funds/snapshot/snapshot.aspx?id={{fund.secIdFondoMorningstar}}"
+              target="_blank">
+              <img width="325" height="150" border="0" id="returnsChart" alt="Crecimiento de 1.000 EUR" src="{{imgSrcPart1}}{{fund.secIdFondoMorningstar}}{{imgSrcPart2}}">
+            </a>
+          </div>
+        </section>
+      </details>
     </li>
   </ol>
+  <div class="floating-button">
+    <a href="https://www.finect.com/fondos-inversion/comparador?products={{selectedIdsString}}" target="_blank">Comparar</a>
+  </div>
+  <div class="floating-button clear-button" (click)="clearSelection()">
+    Borrar
+  </div>
 </ng-container>

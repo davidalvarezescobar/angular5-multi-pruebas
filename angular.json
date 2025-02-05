@@ -1014,7 +1014,11 @@
     },
     "angular-forms-copymaster": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
       "root": "projects/angular-forms-copymaster",
       "sourceRoot": "projects/angular-forms-copymaster/src",
       "prefix": "app",
