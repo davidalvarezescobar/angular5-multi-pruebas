@@ -9,9 +9,11 @@ import { AppService } from './app.service';
 export class AppComponent implements OnInit {
   funds$ = this.appSrv.getFunds();
 
+  selectedOrder = 'ytd';
+
   imgSrcPart1 = 'https://www.morningstar.es/es/funds/WebGraph/growth10k4year.aspx?id=';
   imgSrcPart2 = '&currencyId=EUR&investmenttype=FO&MsRestructureDate=&IMARestructureDate=&RestructureDate=&ShowCategory=1&ShowIndex=1';
-  
+
   constructor(
     readonly appSrv: AppService
   ) { }
@@ -42,5 +44,9 @@ export class AppComponent implements OnInit {
     checkboxes.forEach((checkbox) => {
       (checkbox as HTMLInputElement).checked = false;
     });
+  }
+
+  onOrderChange(order: string): void {
+    this.selectedOrder = order;
   }
 }

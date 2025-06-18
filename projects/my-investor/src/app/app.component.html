@@ -1,7 +1,22 @@
 <ng-container *ngIf="funds$ | async as funds">
+  <form>
+    <fieldset>
+      <legend>Orderan por:</legend>
+      <label for="ratio1">Ratio 1:</label>
+      <input id="ratio1" type="radio" name="orderBy" value="ratio1" (change)="onOrderChange('ratio1')">
+      <label for="ratio3">Ratio 3:</label>
+      <input id="ratio3" type="radio" name="orderBy" value="ratio3" (change)="onOrderChange('ratio3')">
+      <label for="volatilidadYearTres">Volatilidad 3 años:</label>
+      <input id="volatilidadYearTres" type="radio" name="orderBy" value="volatilidadYearTres" (change)="onOrderChange('volatilidadYearTres')">
+      <label for="yearUno">Anualizada 1 año:</label>
+      <input id="yearUno" type="radio" name="orderBy" value="yearUno" (change)="onOrderChange('yearUno')">
+      <label for="ytd">Año actual:</label>
+      <input id="ytd" type="radio" name="orderBy" value="ytd" (change)="onOrderChange('ytd')" checked>
+    </fieldset>
+  </form>
   <h2>{{funds.length}} encontrados</h2>
   <ol>
-    <li *ngFor="let fund of funds | orderBy:{reverse:true, column:'ytd'}; let isEven = even; let isOdd = odd"
+    <li *ngFor="let fund of funds | orderBy:{reverse:true, column:selectedOrder}; let isEven = even; let isOdd = odd"
       [ngClass]="{ 'even-item': isEven, 'odd-item': isOdd }">
       <details open="true">
         <summary>
@@ -24,7 +39,8 @@
             </p>
             <p class="row">
               <span>Año actual: <b>{{fund.ytd}}</b></span>
-              <span>Ratio: <b>{{fund.ratio}}</b></span>
+              <span>Ratio3: <b>{{fund.ratio3}}</b></span>
+              <span>Ratio1: <b>{{fund.ratio1}}</b></span>
               <span>Anualizada 1: <b>{{fund.yearUno}}</b></span>
               <span>Anualizada 3: <b>{{fund.yearTres}}</b></span>
               <span>Anualizada 5: <b>{{fund.yearCinco}}</b></span>

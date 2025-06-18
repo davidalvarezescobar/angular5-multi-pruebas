@@ -1296,5 +1296,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }
