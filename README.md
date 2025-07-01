@@ -1,3 +1,8 @@
+# MyInvestor Server STEP:
+1) cd .\express\myinvestor_server\
+2) node server.js
+
+
 # MultiProject
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.3.

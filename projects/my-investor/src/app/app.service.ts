@@ -15,17 +15,22 @@ export class AppService {
   getFunds(): Observable<any> {
     return this.http.get('/assets/mocks/fondos_2025.json').pipe(
       map((funds:any) => funds.filter(fund => fund.tipoProductoEnum.includes('FONDOS'))),
+      map((funds:any) => funds.filter(fund => fund.yearTres)),
       map((funds:any) => funds.map(fund => {
         let ratio3 = '0';
+        const rentabilidadSinRiesgo = 2; // en porcentaje anual
+
         if (fund.yearTres && fund.volatilidadYearTres) {
-          ratio3 = (fund.yearTres / fund.volatilidadYearTres).toFixed(2);
+          ratio3 = ((fund.yearTres - rentabilidadSinRiesgo) / fund.volatilidadYearTres).toFixed(2);
         }
         return {...fund, ratio3};
       })),
       map((funds:any) => funds.map(fund => {
         let ratio1 = '0';
+        const rentabilidadSinRiesgo = 2; // en porcentaje anual
+
         if (fund.yearUno && fund.volatilidadYearUno) {
-          ratio1 = (fund.yearUno / fund.volatilidadYearUno).toFixed(2);
+          ratio1 = ((fund.yearUno - rentabilidadSinRiesgo) / fund.volatilidadYearUno).toFixed(2);
         }
         return {...fund, ratio1};
       })),
@@ -42,6 +47,8 @@ export class AppService {
         !fund.nombre.toUpperCase().includes('EMERGING') &&
         !fund.nombre.toUpperCase().includes('INSURANCE') &&
         !fund.nombre.toUpperCase().includes('RUSSIA') &&
+        !fund.nombre.toUpperCase().includes('GOLD') &&
+        +fund.impMinPrimeraSubs.split(' ')[0] < 10000 &&
 
         fund.ter < 1.9 &&
 
@@ -68,12 +75,14 @@ export class AppService {
         // fund.ytd >= 1 // a principios de año
 
         // RATIO3
-        // fund.ratio3 > 1 &&
-        // fund.ytd > 3
+        // fund.ratio3 > 2 &&
+        // fund.ytd > 1.6
 
         // RATIO1
-        fund.ratio1 > 4 &&
-        fund.ytd > 2
+        fund.ratio1 > 2.2 &&
+        fund.ytd > 2.3
+
+        // fund.ytd > 2.3
 
         // rentabilidadPasadaCuatro -> 2020
         // rentabilidadPasadaDos -> 2022
