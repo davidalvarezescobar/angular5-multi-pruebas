@@ -5,8 +5,9 @@
 }
 
 .row {
-  display: flex;
-  gap: 28px;
+  display: grid;
+      grid-template-columns: repeat(auto-fit, 225px);
+  row-gap: 28px;
 }
 
 .green {
@@ -95,16 +96,22 @@ section {
 
 .clear-button {
   top: 70px;
-  /* Posición debajo del botón Comparar */
   right: 20px;
   background-color: #dc3545;
-  /* Color rojo para el botón Borrar */
 }
 
-.clear-button:hover {
-  background-color: #c82333;
-  cursor: pointer;
+.graph-button {
+  top: 120px;
+  right: 20px;
+  background-color: goldenrod;
 }
+
+.netreturn-button {
+  top: 170px;
+  right: 20px;
+  background-color: chocolate;
+}
+
 
 fieldset {
   input[type="radio"] {

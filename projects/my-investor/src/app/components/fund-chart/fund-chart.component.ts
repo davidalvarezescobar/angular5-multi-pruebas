@@ -38,26 +38,25 @@ export class FundChartComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
-    this.http.get<any>(`http://localhost:3000/api/fund/${this.fundId}`)
-      .subscribe(data => {
-        const values = data.graphData.fund;
+    this.http.get<any>(`http://localhost:3000/api/fund/${this.fundId}`).subscribe(data => {
+      const values = data.graphData.fund;
 
-        // Filtrar datos a partir de 2020
-        const filteredValues = values.filter((p: any) => new Date(p.date) >= new Date('2020-01-01'));
+      // Filtrar datos a partir de 2020
+      const filteredValues = values.filter((p: any) => new Date(p.date) >= new Date('2020-01-01'));
 
-        this.lineChartData = {
-          labels: filteredValues.map((p: any) => p.date),
-          datasets: [
-            {
-              data: filteredValues.map((p: any) => p.value),
-              label: 'Rentabilidad del fondo',
-              tension: 0.1,
-              fill: true,
-              borderColor: 'blue',
-              pointRadius: 0
-            }
-          ]
-        };
-      });
+      this.lineChartData = {
+        labels: filteredValues.map((p: any) => p.date),
+        datasets: [
+          {
+            data: filteredValues.map((p: any) => p.value),
+            label: 'Rentabilidad del fondo',
+            tension: 0.1,
+            fill: true,
+            borderColor: 'blue',
+            pointRadius: 0
+          }
+        ]
+      };
+    });
   }
 }

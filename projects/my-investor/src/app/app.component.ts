@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BehaviorSubject, forkJoin, map, Observable, switchMap, tap } from 'rxjs';
 import { AppService } from './app.service';
 
 @Component({
@@ -7,7 +8,23 @@ import { AppService } from './app.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  funds$ = this.appSrv.getFunds();
+  showChart = false;
+  showNetReturn$ = new BehaviorSubject<boolean>(false);
+
+  // funds$ = this.appSrv.getFunds().pipe(
+  //   switchMap((funds: any[]) => forkJoin(this.getCurrentRentabilidad(funds))),
+  //   tap((funds: any[]) => console.log('Fondos con rentabilidad:', funds)),
+  // );
+
+  funds$ = this.showNetReturn$.pipe(
+    switchMap(loadMore => this.appSrv.getFunds().pipe(
+      switchMap((funds: any[]) => {
+        if (!loadMore) return [funds]; // con [items] se crea un observable de un array con un único elemento, equivalente a of(funds)
+        return forkJoin(this.getCurrentRentabilidad(funds))
+      }),
+      tap((funds: any[]) => console.log('Fondos con rentabilidad:', funds)),
+    ))
+  );
 
   selectedOrder = 'ytd';
 
@@ -48,5 +65,26 @@ export class AppComponent implements OnInit {
 
   onOrderChange(order: string): void {
     this.selectedOrder = order;
+  }
+
+  getCurrentRentabilidad(funds: any[]): Observable<any>[] {
+    return funds.map(fund =>
+      this.appSrv.getCurrentRentabilidad(fund.secIdFondoMorningstar).pipe(
+        map(rentabilidad => ({
+          ...fund,
+          netReturn1: rentabilidad.netReturn[0], // añade la info de rentabilidad al fondo
+          netReturn3: rentabilidad.netReturn[1], // añade la info de rentabilidad
+          rentabilidad // añade la info de rentabilidad al fondo
+        }))
+      )
+    );
+  }
+
+  onShowNetReturn(): void {
+    this.showNetReturn$.next(true);
+  }
+
+  trackByFn(index: number, item: any): string {
+    return item.idFondo; // O cualquier propiedad única del objeto
   }
 }
